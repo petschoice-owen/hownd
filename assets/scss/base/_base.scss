@@ -1,0 +1,27 @@
+
+.container {
+    padding-right: 20px;
+    padding-left: 20px;
+    max-width: 1220px;
+}
+
+.body__wrapper {
+    overflow: hidden;
+}
+
+a,
+button {
+    transition: .2s ease-in-out;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+@include respond-to(sm-up) {
+    .container {
+        padding-right: 40px;
+        padding-left: 40px;
+    }
+}

@@ -1,0 +1,227 @@
+
+.footer {
+    a {
+        text-decoration: none;
+    }
+
+    &__logos {
+        padding-top: 70px;
+        padding-bottom: 40px;
+        margin-top: 40px;
+        border-top: 1px solid $black;
+
+        &-slide {
+            img {
+                margin: auto;
+                max-width: 100px;
+                height: auto;
+                object-fit: contain;
+            }
+        }
+
+        .slick-dots {
+            display: flex;
+            padding: 0;
+            margin-top: 25px;
+            margin-bottom: 0;
+            list-style: none;
+
+            li {
+                flex: 1;
+            }
+
+            button {
+                padding: 0;
+                margin: 0;
+                width: 100%;
+                height: 2px;
+                font-size: 0;
+                background: $black;
+                border: 0;
+                opacity: .25;
+            }
+
+            li.slick-active button {
+                opacity: 1;
+            }
+
+            & > li:only-child {
+                display: none;
+            }
+        }
+    }
+
+    &__newsletter {
+        padding-top: 50px;
+        padding-bottom: 50px;
+        background-color: $primary;
+
+        h3 {
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        &-text {
+            max-width: 420px;
+            font-family: 'Gotham Medium';
+        }
+
+        &-socials {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-top: 30px;
+            font-size: 35px;
+
+            a {
+                color: $blue2;
+
+                &:hover {
+                    opacity: .6;
+                }
+            }
+        }
+
+        &-icons {
+            display: flex;
+            gap: 30px;
+            margin-top: 30px;
+
+            img {
+                width: 100px;
+                height: auto;
+            }
+        }
+
+        .btn-gray {
+            margin-top: 30px;
+        }
+    }
+
+    &__main {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        margin: 0 -20px 20px;
+    }
+
+    &__logo,
+    &__menu {
+        flex-grow: 1;
+        padding: 0 20px;
+        margin-bottom: 20px;
+    }
+
+    &__logo a {
+        display: block;
+        max-width: 300px;
+    }
+
+    &__menu {
+        ul {
+            padding: 0;
+            list-style: none;
+
+            li {
+                margin-bottom: 10px;
+                line-height: 1.5em;
+            }
+        }
+
+        &-title {
+            font-size: 15px;
+            text-transform: uppercase;
+        }
+
+        a {
+            display: inline-block;
+            font-family: 'Block Berthold Regular';
+            font-size: 13px;
+        }
+
+        &:nth-of-type(3),
+        &:nth-of-type(4) {
+            li:last-of-type a {
+                color: $primary;
+            }
+        }
+    }
+
+    &__wrapper {
+        padding-top: 50px;
+        padding-bottom: 20px;
+        color: $white;
+        background: $wine url('../images/footer.webp') no-repeat;
+        background-size: cover;
+
+        a {
+            color: $white;
+
+            &:hover {
+                opacity: .6;
+            }
+        }
+    }
+
+    &__bottom {
+        display: flex;
+        flex-wrap: wrap;
+        padding-top: 20px;
+        border-top: 1px solid $lgray;
+
+        &-left {
+            flex: 0 0 70%;
+        }
+
+        &-right {
+            flex: 0 0 30%;
+        }
+
+        &-socials {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+    }
+
+    .payment-icons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 15px;
+
+        img {
+            width: 36px;
+        }
+    }
+
+    &__copyright {
+        font-size: 12px;
+    }
+
+    @include respond-to(md-down) {
+        &__logo {
+            display: none;
+        }
+
+        &__menu {
+            flex: 0 0 50%;
+        }
+
+        &__newsletter .col-lg-6:last-child {
+            margin-top: 40px;
+        }
+
+        &__bottom {
+            & > * {
+                flex: 0 0 100%;
+            }
+
+            &-socials {
+                justify-content: flex-start;
+                margin-top: 10px;
+                margin-bottom: 20px;
+            }
+        }
+    }
+}

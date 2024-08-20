@@ -1,0 +1,23 @@
+
+%btn {
+    display: inline-flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 12px 25px;
+    min-width: 200px;
+    min-height: 44px;
+    font-family: "Block Berthold Regular";
+    font-size: 17px;
+    line-height: 1.5em;
+    border-radius: 1px;
+
+    &:hover {
+        border-radius: 10px;
+    }
+}
+
+.btn-gray {
+    @extend %btn;
+    color: $white;
+    background-color: $blue2;
+}
