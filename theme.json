@@ -2,31 +2,68 @@
     "version": 2,
     "settings": {
         "layout": {
-            "contentSize": "1320px",
-            "wideSize": "1600px"
+            "contentSize": "800px",
+            "wideSize": "1100px"
         },
         "color": {
             "palette": [
                 {
                     "name": "Primary",
                     "slug": "primary",
-                    "color": "#1D0056"
+                    "color": "#f7be24"
                 },
                 {
-                    "name": "White",
-                    "slug": "white",
-                    "color": "#ffffff"
+                    "name": "Blue",
+                    "slug": "blue",
+                    "color": "#1c2b42"
                 },
                 {
-                    "name": "Black",
-                    "slug": "black",
-                    "color": "#000000"
+                    "name": "Safari",
+                    "slug": "safari",
+                    "color": "#3b5161"
+                },
+                {
+                    "name": "Gray",
+                    "slug": "gray",
+                    "color": "#757575"
+                },
+                {
+                    "name": "Light Gray",
+                    "slug": "light-gray",
+                    "color": "#e2e2e2"
+                },
+                {
+                    "name": "Green",
+                    "slug": "green",
+                    "color": "#006747"
                 }
             ],
             "gradients": [
 			]
         },
         "typography": {
+            "fontFamilies": [
+				{
+					"fontFamily": "Block Berthold Regular, sans-serif",
+					"slug": "block-berthold-regular",
+					"name": "Block Berthold Regular"
+				},
+                {
+					"fontFamily": "Gotham Book, sans-serif",
+					"slug": "gotham-book",
+					"name": "Gotham Book"
+				},
+                {
+					"fontFamily": "Gotham Medium, sans-serif",
+					"slug": "gotham-medium",
+					"name": "Gotham Medium"
+				},
+                {
+					"fontFamily": "Gotham Bold, sans-serif",
+					"slug": "gotham-bold",
+					"name": "Gotham Bold"
+				}
+			],
             "fontSizes": [
                 {
 					"slug": "small",
@@ -40,12 +77,12 @@
 				},
                 {
 					"slug": "large",
-					"size": "28px",
+					"size": "25px",
 					"name": "Large"
 				},
                 {
 					"slug": "xlarge",
-					"size": "32px",
+					"size": "30px",
 					"name": "Extra Large"
 				},
                 {

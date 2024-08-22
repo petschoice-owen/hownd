@@ -1,0 +1,54 @@
+@import '../../assets/scss/abstract/variables';
+@import '../../assets/scss/abstract/mixins';
+
+.hownd-checklist-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-right: -15px;
+    margin-left: -15px;
+    text-align: center;
+
+    &__item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 15px;
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+    
+    .check-icon {
+        margin-bottom: 20px;
+    }
+
+    &__title {
+        color: $yellow2;
+    }
+
+    &__text {
+        margin-bottom: 30px;
+    }
+
+    &__image {
+        margin-top: auto;
+
+        img {
+            width: auto;
+            max-width: 130px;
+            height: 121px;
+            object-fit: contain;
+        }
+    }
+
+    @include respond-to(md-up) {
+        &__item {
+            flex: 0 0 33.33%;
+            max-width: 33.33%;
+        }
+
+        &__text {
+            margin-bottom: 50px;
+        }
+    }
+}

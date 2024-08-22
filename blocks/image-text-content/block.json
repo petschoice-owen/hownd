@@ -1,0 +1,36 @@
+{
+    "name": "hownd-image-text-content",
+    "title": "Hownd - Image with Text Content",
+    "description": "A block that displays an image with text content in a section.",
+    "style": "block-image-text-content",
+    "category": "hownd-blocks",
+    "icon": "align-left",
+    "apiVersion": 2,
+    "keywords": ["image", "text", "content", "column", "text content", "image text"],
+    "acf": {
+        "mode": "preview",
+	    "renderTemplate": "image-text-content.php"
+    },
+    "styles": [],
+    "supports": {
+        "color": {
+            "background": true,
+            "gradients": true
+        },
+        "anchor": true
+    },
+    "attributes": {
+        "align": {
+            "type": "string",
+            "default": "full"
+        }
+    },
+    "example": {
+        "attributes": {
+            "mode": "preview",
+            "data": {
+                "preview_image-text-content": true
+            }
+        }
+    }
+}

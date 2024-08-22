@@ -11,7 +11,7 @@
     line-height: 1.5em;
     border-radius: 1px;
 
-    &:hover {
+    @include on-event() {
         border-radius: 10px;
     }
 }
@@ -20,4 +20,17 @@
     @extend %btn;
     color: $white;
     background-color: $blue2;
+}
+
+.wp-block-button {
+    & > .wp-block-button__link {
+        @extend %btn;
+        color: $white;
+        background-color: $primary;
+
+        @include on-event() {
+            color: $blue;
+            border-radius: 1px;
+        }
+    }
 }

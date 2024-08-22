@@ -1,0 +1,61 @@
+@import '../../assets/scss/abstract/variables';
+@import '../../assets/scss/abstract/mixins';
+
+.hownd-three-col {
+    padding-top: 65px;
+    padding-bottom: 65px;
+    font-size: 20px;
+
+    & > .acf-innerblocks-container {
+        display: flex;
+        flex-wrap: wrap;
+        margin-right: -15px;
+        margin-left: -15px;
+    }
+
+    &__column {
+        padding: 15px;
+
+        &.is-style-align-center {
+            align-self: center;
+        }
+
+        & > .acf-innerblocks-container > *:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    @include respond-to(lg-up) {
+        &__column {
+            flex: 0 0 33.33%;
+            max-width: 33.33%;
+        }
+    }
+
+    @media (min-width: 768px) and (max-width: 1024px) {
+        &__column {
+            flex: 0 0 50%;
+            max-width: 50%;
+
+            &:last-child {
+                flex: 0 0 100%;
+                max-width: 100%;
+            }
+        }
+    }
+
+    @include respond-to(sm-down) {
+        padding-top: 15px;
+        padding-bottom: 15px;
+        text-align: center;
+
+        .wp-block-buttons {
+            justify-content: center;
+        }
+
+        &__column {
+            flex: 0 0 100%;
+            max-width: 100%;
+        }
+    }
+}

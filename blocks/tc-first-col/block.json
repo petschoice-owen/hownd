@@ -1,0 +1,23 @@
+{
+    "name": "hownd-tc-first-col",
+    "title": "Hownd - First Column",
+    "description": "First column of three-col section",
+    "style": "block-tc-first-col",
+    "category": "hownd-blocks",
+    "icon": "columns",
+    "apiVersion": 2,
+    "acf": {
+        "mode": "preview",
+	    "renderTemplate": "tc-first-col.php"
+    },
+    "parent": ["hownd-three-column"],
+    "styles": [],
+    "supports": {
+        "anchor": true,
+        "align": false
+    },
+    "attributes": {
+    },
+    "example": {
+    }
+}

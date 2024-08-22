@@ -1,0 +1,28 @@
+{
+    "name": "hownd-three-column",
+    "title": "Hownd - Three Column Section",
+    "description": "A three column section.",
+    "style": "block-three-column",
+    "category": "hownd-blocks",
+    "icon": "table-row-after",
+    "apiVersion": 2,
+    "keywords": ["three", "column"],
+    "acf": {
+        "mode": "preview",
+	    "renderTemplate": "three-column.php"
+    },
+    "styles": [],
+    "supports": {
+        "anchor": true
+    },
+    "attributes": {
+    },
+    "example": {
+        "attributes": {
+            "mode": "preview",
+            "data": {
+                "preview_image_three_col": true
+            }
+        }
+    }
+}

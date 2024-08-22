@@ -1,0 +1,23 @@
+{
+    "name": "hownd-tc-third-col",
+    "title": "Hownd - Third Column",
+    "description": "Third column of three-col section",
+    "style": "block-tc-third-col",
+    "category": "hownd-blocks",
+    "icon": "columns",
+    "apiVersion": 2,
+    "acf": {
+        "mode": "preview",
+	    "renderTemplate": "tc-third-col.php"
+    },
+    "parent": ["hownd-three-column"],
+    "styles": [],
+    "supports": {
+        "anchor": true,
+        "align": false
+    },
+    "attributes": {
+    },
+    "example": {
+    }
+}

@@ -73,3 +73,27 @@ function block_categories( $categories ) {
 }
 add_filter( 'block_categories_all', __NAMESPACE__ . '\block_categories' );
 add_filter( 'should_load_separate_core_block_assets', '__return_true' );
+
+
+add_action('init', function() {
+	register_block_style('acf/hownd-tc-first-col',
+		[
+			'name' => 'align-center',
+			'label' => __('Align Center', 'hownd'),
+		]
+	);
+
+	register_block_style('acf/hownd-tc-second-col',
+		[
+			'name' => 'align-center',
+			'label' => __('Align Center', 'hownd'),
+		]
+	);
+
+	register_block_style('acf/hownd-tc-third-col',
+		[
+			'name' => 'align-center',
+			'label' => __('Align Center', 'hownd'),
+		]
+	);
+});

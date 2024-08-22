@@ -1,0 +1,23 @@
+{
+    "name": "hownd-tc-second-col",
+    "title": "Hownd - Second Column",
+    "description": "Second column of three-col section",
+    "style": "block-tc-second-col",
+    "category": "hownd-blocks",
+    "icon": "columns",
+    "apiVersion": 2,
+    "acf": {
+        "mode": "preview",
+	    "renderTemplate": "tc-second-col.php"
+    },
+    "parent": ["hownd-three-column"],
+    "styles": [],
+    "supports": {
+        "anchor": true,
+        "align": false
+    },
+    "attributes": {
+    },
+    "example": {
+    }
+}

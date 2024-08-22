@@ -1,7 +1,7 @@
 
 body {
     font-family: 'Gotham Book';
-    font-size: 16px;
+    font-size: 18px;
     line-height: 1.15;
     color: $blue;
 }
@@ -18,4 +18,10 @@ h2 {
 
 h3 {
     font-size: 25px;
+}
+
+@include respond-to(lg-down) {
+    h1,h2 {
+        font-size: 35px;
+    }
 }

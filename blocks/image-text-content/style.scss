@@ -1,0 +1,92 @@
+@import '../../assets/scss/abstract/variables';
+@import '../../assets/scss/abstract/mixins';
+
+.hownd-itc {
+    background-size: cover;
+
+    &__row {
+        display: flex;
+        flex-wrap: wrap;
+
+        .col-content,
+        .col-image {
+            padding-right: 20px;
+            padding-left: 20px;
+            flex: 0 0 100%;
+        }
+
+        .col-content {
+            font-size: 20px;
+
+            .wp-block-buttons {
+                margin-top: 20px;
+            }
+        }
+    }
+
+    @include respond-to(md-up) {
+        &__row {
+            .col-content,
+            .col-image {
+                flex: 0 0 50%;
+            }
+
+            &.image--left {
+                .col-image {
+                    order: -1;
+                }
+            }
+        }
+    }
+
+    @media (min-width: 768px) and (max-width: 1024px) {
+        &.home-banner {
+            .col-image {
+                flex: 0 0 40%;
+            }
+
+            .col-content {
+                flex: 0 0 60%;
+
+                img {
+                    width: auto;
+                    max-height: 100px;
+                }
+
+                h2.has-xlarge-font-size {
+                    font-size: 20px !important;
+                }
+            }
+        }
+    }
+
+    @include respond-to(sm-down) {
+        &__row {
+            .col-content,
+            .col-image {
+                padding-right: 10px;
+                padding-left: 10px;
+            }
+
+            .col-content {
+                text-align: center;
+
+                h1 {
+                    font-size: 40px;
+                }
+
+                h2 {
+                    font-size: 46px;
+                }
+
+                .wp-block-buttons {
+                    justify-content: center;
+                }
+            }
+
+            .col-image {
+                margin-top: 30px;
+            }
+        }
+    }
+}
