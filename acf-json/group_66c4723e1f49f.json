@@ -115,8 +115,10 @@
             "choices": {
                 "top left": "Top Left",
                 "top right": "Top Right",
-                "top center": "Top center",
+                "top center": "Top Center",
+                "right center": "Right Center",
                 "center": "Center",
+                "left center": "Left Center",
                 "bottom left": "Bottom Left",
                 "bottom right": "Bottom Right",
                 "bottom center": "Bottom Center"
@@ -148,5 +150,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1724150937
+    "modified": 1724317450
 }
