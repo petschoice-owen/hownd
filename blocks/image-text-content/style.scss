@@ -62,6 +62,21 @@
         }
     }
 
+    @include respond-to(xl) {
+        h1 {
+            font-size: 46px;
+        }
+    }
+
+    @include respond-to(md-down) {
+        &:not(.home-banner) {
+            .col-content .wp-block-image img {
+                width: auto !important;
+                max-height: 150px;
+            }
+        }
+    }
+
     @include respond-to(sm-down) {
         &__row {
             .col-content {

@@ -3,12 +3,14 @@
     display: inline-flex;
     justify-content: space-around;
     align-items: center;
-    padding: 12px 25px;
+    padding: 7px 25px;
     min-width: 200px;
     min-height: 44px;
     font-family: "Block Berthold Regular";
-    font-size: 17px;
-    line-height: 1.5em;
+    font-size: 20px;
+    line-height: 1.2;
+    text-decoration: none;
+    text-transform: uppercase;
     border-radius: 1px;
 
     @include on-event() {
@@ -26,11 +28,17 @@
     & > .wp-block-button__link {
         @extend %btn;
         color: $white;
-        background-color: $primary;
+        background-color: $yellow2;
 
         @include on-event() {
             color: $blue;
             border-radius: 1px;
         }
     }
+}
+
+.btn-primary {
+    @extend %btn;
+    color: $blue;
+    background-color: $yellow2;
 }

@@ -16,6 +16,14 @@ main {
                 }
             }
         }
+
+        &-image.aligncenter {
+            display: block;
+        }
+
+        &-heading a {
+            text-decoration: inherit;
+        }
     }
 
     @include respond-to(sm-down) {

@@ -1,0 +1,155 @@
+@import '../../assets/scss/abstract/variables';
+@import '../../assets/scss/abstract/mixins';
+
+.hownd-accordion {
+    position: relative;
+    margin: 40px auto;
+    max-width: 740px;
+
+    &__item {
+        &-header {
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 0 11px;
+            font-family: 'Block Berthold Regular';
+            font-size: 15px;
+            color: $blue;
+            text-transform: uppercase;
+            cursor: pointer;
+
+            .icon {
+                color: $blue;
+                transition: .2s ease-in-out;
+
+                svg {
+                    width: 16px;
+                }
+            }
+
+            &[aria-expanded="true"] {
+                .icon {
+                    transform: rotate(45deg);
+                }
+
+                &:after {
+                    opacity: 1;
+                }
+            }
+
+            &:after {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: -18px;
+                z-index: -1;
+                width: calc(100% + 36px);
+                height: 100%;
+                background-color: $lgray7;
+                opacity: 0;
+                transition: .2s ease-in-out;
+            }
+
+            &:hover:after {
+                opacity: 1;
+            }
+        }
+
+        &-content {
+            padding-top: 20px;
+            padding-bottom: 10px;
+            font-size: 16px;
+
+            a {
+                color: $primary;
+            }
+        }
+    }
+
+    &__group {
+        &-title {
+            text-transform: uppercase;
+        }
+
+        & + .hownd-accordion__group {
+            margin-top: 45px;
+        }
+    }
+
+    .btn-primary {
+        font-size: 14px;
+    }
+
+    &__search {
+        position: relative;
+        margin-bottom: 50px;
+
+        &-input {
+            display: block;
+            padding: 12px 30px 12px 12px;
+            width: 100%;
+            font-family: 'Block Berthold Regular';
+            font-size: 15px;
+            color: $blue3;
+            text-transform: uppercase;
+            box-shadow: none;
+            outline: 0;
+            background-color: $lgray7;
+            border: 0;
+
+            @include placeholder() {
+                color: $blue3;
+            }
+        }
+
+        &-icon {
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            line-height: 0;
+            transform: translateY(-50%);
+        }
+    }
+
+    &__sidebar {
+        position: absolute;
+        margin-left: -200px;
+        width: 180px;
+        text-transform: uppercase;
+
+        &-title {
+            margin-bottom: 40px;
+        }
+
+        li {
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+
+        a {
+            font-family: 'Block Berthold Regular';
+            font-size: 15px;
+            color: $blue3;
+            text-decoration: none;
+        }
+    }
+}
+
+.autocomplete-suggestions {
+    padding-top: 20px;
+    padding-left: 10px;
+    overflow-y: auto;
+    font-family: 'Block Berthold Regular';
+    font-size: 15px;
+    color: $blue3;
+    text-transform: uppercase;
+    background-color: $white;
+    border: 1px solid $lgray7;
+    
+    .autocomplete-suggestion {
+        padding-bottom: 10px;
+        cursor: pointer;
+    }
+}

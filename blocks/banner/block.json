@@ -1,0 +1,33 @@
+{
+    "name": "hownd-banner",
+    "title": "Hownd - Banner",
+    "description": "Hero banner",
+    "style": "block-banner",
+    "category": "hownd-blocks",
+    "icon": "align-full-width",
+    "apiVersion": 2,
+    "keywords": ["banner", "hero"],
+    "acf": {
+        "mode": "preview",
+	    "renderTemplate": "banner.php"
+    },
+    "styles": [],
+    "supports": {
+        "color": {
+            "background": true,
+            "gradients": true
+        },
+        "anchor": true,
+        "align": false
+    },
+    "attributes": {
+    },
+    "example": {
+        "attributes": {
+            "mode": "preview",
+            "data": {
+                "preview_banner": true
+            }
+        }
+    }
+}

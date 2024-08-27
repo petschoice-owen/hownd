@@ -1,0 +1,30 @@
+{
+    "name": "hownd-faq",
+    "title": "Hownd - FAQ",
+    "description": "Group of accordions with search and sidebar (dedicated for FAQ page)",
+    "style": "block-faq",
+    "category": "hownd-blocks",
+    "icon": "list-view",
+    "apiVersion": 2,
+    "keywords": ["accordion", "collapse", "faq"],
+    "acf": {
+        "mode": "edit",
+	    "renderTemplate": "faq.php"
+    },
+    "styles": [],
+    "supports": {
+        "anchor": true,
+        "align": false,
+        "multiple": false
+    },
+    "attributes": {
+    },
+    "example": {
+        "attributes": {
+            "mode": "preview",
+            "data": {
+                "preview_faq": true
+            }
+        }
+    }
+}

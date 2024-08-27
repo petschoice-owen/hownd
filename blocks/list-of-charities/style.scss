@@ -1,0 +1,37 @@
+@import '../../assets/scss/abstract/variables';
+@import '../../assets/scss/abstract/mixins';
+
+.hownd-list-charities {
+    font-size: 16px;
+    color: $blue;
+
+    &__col {
+        padding-right: 15px;
+        padding-left: 15px;
+        margin-bottom: 40px;
+    }
+
+    &__image {
+        display: flex;
+        justify-self: center;
+        align-items: center;
+        margin-bottom: 30px;
+        width: 100%;
+        height: 360px;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        &.placeholder {
+            background-color: $lgray6;
+        }
+    }
+
+    &__title {
+        font-size: 30px;
+        text-align: center;
+    }
+}

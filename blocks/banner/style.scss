@@ -1,0 +1,59 @@
+@import '../../assets/scss/abstract/variables';
+@import '../../assets/scss/abstract/mixins';
+
+.hownd-banner {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 50px 0;
+    min-height: 300px;
+
+    .acf-innerblocks-container {
+        position: relative;
+        z-index: 2;
+        padding-right: 20px;
+        padding-left: 20px;
+        margin-right: auto;
+        margin-left: auto;
+        width: 100%;
+        max-width: 1220px;
+
+        & > *:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    &__bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+    }
+
+    &__overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        width: 100%;
+        height: 100%;
+    }
+
+    h1 {
+        font-size: 50px;
+    }
+
+    @include respond-to(md-up) {
+        justify-content: center;
+        min-height: 475px;
+
+        h1 {
+            font-size: 80px;
+        }
+    }
+}
