@@ -12,6 +12,10 @@
     },
     "styles": [],
     "supports": {
+        "color": {
+            "background": true,
+            "gradients": true
+        },
         "align": false,
         "anchor": true
     },

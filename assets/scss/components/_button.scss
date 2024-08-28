@@ -35,6 +35,16 @@
             border-radius: 1px;
         }
     }
+
+    &.is-style-outline > .wp-block-button__link {
+        background-color: transparent;
+
+        @include on-event() {
+            color: $white;
+            background-color: $yellow2;
+            border-color: $yellow2;
+        }
+    }
 }
 
 .btn-primary {

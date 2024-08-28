@@ -24,7 +24,7 @@ else : ?>
                 <div class="hownd-checklist-grid__item">
                     <img class="check-icon" src="<?php echo get_template_directory_uri(); ?>/assets/images/icon-check.webp" alt="check" width="72" height="72">
                     <?php echo get_sub_field( 'title' ) ? '<h3 class="hownd-checklist-grid__title">'. get_sub_field( 'title' ) .'</h3>' : ''; ?>
-                    <?php echo get_sub_field( 'text' ) ? '<div class="hownd-checklist-grid__text">'. get_sub_field( 'text' ) .'</div>' : ''; ?>
+                    <?php echo get_sub_field( 'text' ) ? '<div class="hownd-checklist-grid__text '. (get_sub_field( 'image' ) ? '' : 'mb-0') .'">'. get_sub_field( 'text' ) .'</div>' : ''; ?>
                     <?php if ( $image = get_sub_field( 'image' ) ) : ?>
                         <?php echo '<div class="hownd-checklist-grid__image">'. wp_get_attachment_image( $image, 'medium' ) . '</div>'; ?>
                     <?php endif ;?>

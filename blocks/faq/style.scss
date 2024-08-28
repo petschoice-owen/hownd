@@ -1,7 +1,7 @@
 @import '../../assets/scss/abstract/variables';
 @import '../../assets/scss/abstract/mixins';
 
-.hownd-accordion {
+.hownd-faq {
     position: relative;
     margin: 40px auto;
     max-width: 740px;
@@ -73,7 +73,7 @@
             text-transform: uppercase;
         }
 
-        & + .hownd-accordion__group {
+        & + .hownd-faq__group {
             margin-top: 45px;
         }
     }

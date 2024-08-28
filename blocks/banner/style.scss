@@ -48,12 +48,28 @@
         font-size: 50px;
     }
 
+    &.banner--about {
+        padding-top: 300px;
+
+        @include respond-to(sm-down) {
+            p.has-large-font-size {
+                font-size: 20px !important;
+            }
+        }
+    }
+
     @include respond-to(md-up) {
         justify-content: center;
         min-height: 475px;
 
         h1 {
             font-size: 80px;
+        }
+    }
+
+    @include respond-to(xl) {
+        &.banner--about {
+            padding-top: 25%;
         }
     }
 }

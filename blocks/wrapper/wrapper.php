@@ -10,7 +10,8 @@
 $wrapper_attributes = get_block_wrapper_attributes(
     [
         'class' => 'hownd-wrapper mx-auto',
-        'id'    =>  isset($block['anchor']) ? $block['anchor'] : ''
+        'id'    =>  isset($block['anchor']) ? $block['anchor'] : '',
+        'style' => 'max-width: ' .  get_field( 'hownd_wrapper_maximum_width') . 'px;'
     ]
 );
 ?>
@@ -19,7 +20,7 @@ if ( isset($block['data']['preview_image_wrapper']) ) :
     echo '<img src="'. get_template_directory_uri() .'/assets/blocks-preview/preview-wrapper.png" style="width:100%; height:auto;">';
 else :
 ?>
-<div <?php echo $wrapper_attributes; ?> style="max-width: <?php echo get_field( 'hownd_wrapper_maximum_width') . 'px'; ?>">
+<div <?php echo $wrapper_attributes; ?>>
     <InnerBlocks />
 </div>
 <?php endif; ?>

@@ -96,4 +96,11 @@ add_action('init', function() {
 			'label' => __('Align Center', 'hownd'),
 		]
 	);
+
+	register_block_style('acf/hownd-wrapper',
+		[
+			'name' => 'with-padding',
+			'label' => __('With Padding', 'hownd'),
+		]
+	);
 });
