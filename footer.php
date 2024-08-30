@@ -1,4 +1,25 @@
         <?php echo is_woocommerce() ? '</div>' : ''; ?>
+        <?php if( is_product() && have_rows( 'hownd_product_text_images', 'option' ) ) : ?>
+            <div class="single-product__text-images">
+                <div class="container">
+                    <div class="row">
+                        <?php while( have_rows( 'hownd_product_text_images', 'option' ) ) : the_row(); ?>
+                        <div class="col-12 col-md-4 single-product__text-images-col">
+                            <?php
+                                if( $logo_img = get_sub_field( 'image' ) ) {
+                                    echo wp_get_attachment_image( $logo_img, 'medium' );
+                                }
+
+                                if( $text = get_sub_field( 'title' ) ) {
+                                    echo '<h3>'. $text .'</h3>';
+                                }
+                            ?>
+                        </div>
+                        <?php endwhile; ?>
+                    </div>
+                </div>
+            </div>
+        <?php endif; ?>
     </main>
     <footer class="footer">
         <?php if ( have_rows( 'hownd_footer_logo_slider', 'option' ) ): ?>
