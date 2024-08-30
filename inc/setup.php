@@ -48,7 +48,9 @@ add_theme_support( 'align-wide' );
 add_theme_support( 'editor-styles' );
 add_theme_support( 'custom-logo' );
 
-add_theme_support( 'woocommerce' );
+add_theme_support( 'woocommerce', array(
+    'gallery_thumbnail_image_width' => 300,
+) );
 add_theme_support( 'wc-product-gallery-zoom' );
 add_theme_support( 'wc-product-gallery-lightbox' );
 add_theme_support( 'wc-product-gallery-slider' );

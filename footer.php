@@ -1,4 +1,4 @@
-
+        <?php echo is_woocommerce() ? '</div>' : ''; ?>
     </main>
     <footer class="footer">
         <?php if ( have_rows( 'hownd_footer_logo_slider', 'option' ) ): ?>

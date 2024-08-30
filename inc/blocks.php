@@ -103,4 +103,18 @@ add_action('init', function() {
 			'label' => __('With Padding', 'hownd'),
 		]
 	);
+
+	register_block_style('core/list',
+		[
+			'name' => 'paws',
+			'label' => __('Paws', 'hownd'),
+		]
+	);
+
+	register_block_style('core/button',
+		[
+			'name' => 'paws-link',
+			'label' => __('Link with Paws', 'hownd'),
+		]
+	);
 });

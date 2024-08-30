@@ -134,3 +134,4 @@
         </header>
         <div class="header-placeholder"></div>
         <main>
+            <?php echo is_woocommerce() ? '<div class="container">' : ''; ?>

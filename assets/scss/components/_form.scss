@@ -1,0 +1,52 @@
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+select {
+    padding: 10px;
+    min-height: 48px;
+    font-size: 16px;
+    color: $gray4;
+    box-shadow: 1px 2px rgba(0,0,0,.2);
+    background-color: $white;
+    border: 0;
+    border-radius: 3px;
+}
+
+select {
+    padding: 10px 30px 10px 10px;
+    appearance: none;
+    background-image: url('../images/caret-down.svg');
+    background-position: right 15px center;
+    background-repeat: no-repeat;
+    background-size: 12px;
+}
+
+.woocommerce .quantity {
+    display: flex;
+    align-items: center;
+    font-family: 'Block Berthold Regular';
+    text-align: center;
+
+    .qty {
+        width: 40px;
+        height: 48px;
+        font-size: 15px;
+        color: $blue;
+        background-color: $lgray7;
+        border: 0;
+        -webkit-appearance: none;
+
+        &::-webkit-inner-spin-button {
+            display: none;
+        }
+    }
+
+    .minus-btn,
+    .plus-btn {
+        width: 24px;
+        height: 24px;
+        font-weight: 700;
+        cursor: pointer;
+    }
+}

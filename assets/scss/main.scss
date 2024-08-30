@@ -18,7 +18,8 @@
 
 // 4. Components
 @import
-  'components/button';
+  'components/button',
+  'components/form';
 
 // 5. Layout-related sections
 @import
@@ -26,3 +27,8 @@
   'layout/footer',
   'layout/gutenberg',
   'layout/global';
+
+  // 5. Pages
+@import
+'pages/product',
+'pages/shop';

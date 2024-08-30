@@ -31,6 +31,37 @@ h4 {
     font-size: 20px;
 }
 
+ul.is-style-paws {
+    padding-left: 0;
+    list-style: none;
+    font-family: 'Block Berthold Regular';
+    font-size: 25px;
+    text-transform: uppercase;
+
+    li {
+        position: relative;
+        padding-left: 40px;
+        margin-bottom: 25px;
+        line-height: 1.15;
+        
+        &:before {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 0;
+            display: block;
+            width: 23px;
+            height: 23px;
+            background: url('../images/paws-black.svg') no-repeat center;
+            background-size: 23px;
+        }
+    }
+}
+
+b, strong {
+    font-family: 'Gotham Medium';
+}
+
 @include respond-to(lg-down) {
     h1,h2 {
         font-size: 35px;

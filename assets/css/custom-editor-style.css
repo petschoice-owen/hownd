@@ -101,6 +101,51 @@ h1,h2,h3,h4,h5,h6 {
     border-radius: 10px;
 }
 
+.wp-block-button.is-style-paws-link > .wp-block-button__link {
+    position: relative;
+    padding: 10px;
+    min-width: 0;
+    font-size: 18px;
+    color: #395263;
+    text-transform: none;
+    background-color: transparent;
+}
+.wp-block-button.is-style-paws-link > .wp-block-button__link:before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: #395263;
+    transition: .2s ease-in-out;
+}
+
+.wp-block-button.is-style-paws-link > .wp-block-button__link:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: calc(100% - 5px);
+    display: block;
+    width: 18px;
+    height: 18px;
+    background: url('../images/paws-yellow.svg') no-repeat center;
+    background-size: 18px;
+    transform: translateY(-50%);
+    transition: .2s ease-in-out;
+    opacity: 0;
+}
+.wp-block-button.is-style-paws-link > .wp-block-button__link:hover{
+    color: #f7be24;
+}
+.wp-block-button.is-style-paws-link > .wp-block-button__link:hover:before {
+    opacity: 0;
+}
+.wp-block-button.is-style-paws-link > .wp-block-button__link:hover:after {
+    opacity: 1;
+}
+
 .hownd-three-col > .acf-innerblocks-container > .wp-block {
     flex: 0 0 33.33%;
 }
@@ -108,4 +153,44 @@ h1,h2,h3,h4,h5,h6 {
 .hownd-three-col__column {
     flex: 0 0 100%;
     max-width: 100%;
+}
+
+.mx-auto {
+    margin-right: auto !important;
+    margin-left: auto !important;
+}
+
+.wp-block-acf-hownd-banner {
+    max-width: 100% !important;
+}
+
+.hownd-banner__bg {
+    height: 100% !important;
+}
+
+ul.is-style-paws {
+    padding-left: 0;
+    list-style: none;
+    font-family: 'Block Berthold Regular';
+    font-size: 25px;
+    text-transform: uppercase;
+}
+
+ul.is-style-paws li {
+    position: relative;
+    padding-left: 40px;
+    margin-bottom: 25px;
+    line-height: 1.15;
+}
+
+ul.is-style-paws li:before {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 0;
+    display: block;
+    width: 23px;
+    height: 23px;
+    background: url('../images/paws-black.svg') no-repeat center;
+    background-size: 23px;
 }

@@ -45,6 +45,55 @@
             border-color: $yellow2;
         }
     }
+
+    &.is-style-paws-link > .wp-block-button__link {
+        position: relative;
+        padding: 10px;
+        min-width: 0;
+        font-size: 18px;
+        color: $blue3;
+        text-transform: none;
+        background-color: transparent;
+
+        &:before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            display: block;
+            width: 100%;
+            height: 3px;
+            background-color: $blue3;
+            transition: .2s ease-in-out;
+        }
+
+        &:after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: calc(100% - 5px);
+            display: block;
+            width: 18px;
+            height: 18px;
+            background: url('../images/paws-yellow.svg') no-repeat center;
+            background-size: 18px;
+            transform: translateY(-50%);
+            transition: .2s ease-in-out;
+            opacity: 0;
+        }
+
+        @include on-event() {
+            color: $primary;
+
+            &:before {
+                opacity: 0;
+            }
+
+            &:after {
+                opacity: 1;
+            }
+        }
+    }
 }
 
 .btn-primary {

@@ -108,6 +108,57 @@ jQuery(function($) {
         }
     };
 
+    const bos4wInputRadio = () => {
+        if($('.bos4w-display-options').length > 0) {
+            $('.bos4w-display-options').find('input[type="radio"]').each(function() {
+                $(this).on('change', function(e){
+                    $('.bos4w-display-options').find('label').removeClass('checked');
+                    if ($(this).is(':checked')) {
+                        $(this).closest('label').addClass('checked');
+                    }
+                });
+                if ($(this).is(':checked')) {
+                    $(this).closest('label').addClass('checked');
+                }
+            });
+        }
+    };
+
+    const productQuantity = () => {
+        // Quantity buttons
+        $(document).on('click', '.quantity .plus-btn, .quantity .minus-btn', function() {
+            var $quantityInput = $(this).closest('.quantity').find('.qty');
+            var currentValue = parseFloat($quantityInput.val());
+            var max_value = $quantityInput.attr('max') ? parseFloat($quantityInput.attr('max')) : '';
+            var step = $quantityInput.attr('step') ? parseFloat($quantityInput.attr('step')) : 1;
+            if ($(this).is('.plus-btn')) {
+                if (max_value !== '' && (max_value <= currentValue)) {
+                    return;
+                }
+                $quantityInput.val(currentValue + step);
+            } else {
+                if (currentValue > 1) {
+                    $quantityInput.val(currentValue - step);
+                }
+            }
+
+            $quantityInput.trigger('change');
+        });
+    };
+
+    const productAccordion = () => {
+        if($('.single-product').length > 0) {
+            $(document).on('click', '.hownd-tab-toggler', function(e) {
+                e.preventDefault();
+                $(this).closest('.woocommerce-tabs').find('.hownd-tab-toggler').not($(this)).removeClass('active');
+                $(this).toggleClass('active');
+            });
+        }
+    };
+
     header();
     logoSlider();
+    bos4wInputRadio();
+    productQuantity();
+    productAccordion();
 });
