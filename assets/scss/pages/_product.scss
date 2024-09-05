@@ -149,6 +149,19 @@
                     background-color: $primary;
                 }
             }
+
+            .social-share {
+                display: flex;
+                align-items: center;
+                gap: 15px;
+                margin-top: 30px;
+                font-size: 30px;
+
+                a {
+                    color: $blue3;
+                    text-decoration: none;
+                }
+            }
         }
 
         div.woocommerce-tabs {
@@ -344,7 +357,7 @@
 
                     &.active {
                         &:after {
-                            content: '-';
+                            content: '\2014';
                         }
 
                         & + .hownd-tab-content-wrapper {
