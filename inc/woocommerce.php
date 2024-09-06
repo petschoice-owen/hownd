@@ -94,18 +94,18 @@ function hownd_product_tabs( $tabs ) {
             'callback' => 'hownd_ingredients_product_tab_content',
         );
     }
-    if(get_field( 'hownd_product_faqs', $product->get_ID() )) {
-        $tabs['faqs'] = array(
-            'title' => __( 'FAQs', 'woocommerce' ),
-            'priority' => 45,
-            'callback' => 'hownd_faqs_product_tab_content',
-        );
-    }
     if(get_field( 'hownd_product_video', $product->get_ID() )) {
         $tabs['video'] = array(
             'title' => __( 'Video', 'woocommerce' ),
             'priority' => 50,
             'callback' => 'hownd_video_product_tab_content',
+        );
+    }
+    if(get_field( 'hownd_product_faqs', $product->get_ID() )) {
+        $tabs['faqs'] = array(
+            'title' => __( 'FAQs', 'woocommerce' ),
+            'priority' => 45,
+            'callback' => 'hownd_faqs_product_tab_content',
         );
     }
     $tabs[ 'description' ][ 'callback' ] = 'hownd_custom_description_callback';
@@ -120,13 +120,14 @@ remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_singl
 //remove related products
 remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_related_products', 20 );
 
-//remove sidebar on product page
-function hownd_remove_sidebar_product_pages() {
-    if ( is_product() ) {
-        remove_action( 'woocommerce_sidebar', 'woocommerce_get_sidebar', 10 );
-    }
-}
-add_action( 'wp', 'hownd_remove_sidebar_product_pages' );
+//remove sidebar 
+remove_action( 'woocommerce_sidebar', 'woocommerce_get_sidebar', 10 );
+// function hownd_remove_sidebar_product_pages() {
+//     if ( is_product() || is_shop() ) {
+//         remove_action( 'woocommerce_sidebar', 'woocommerce_get_sidebar', 10 );
+//     }
+// }
+// add_action( 'wp', 'hownd_remove_sidebar_product_pages' );
 
 /**
  * Remove WooCommerce breadcrumbs 
@@ -160,3 +161,35 @@ function hownd_display_quantity_minus() {
 	return $subscription_intervals;
 }
 add_filter( 'woocommerce_subscription_period_interval_strings', 'hownd_add_custom_subscription_interval' );
+
+//RECENTLY VIEWED PRODUCTS SHORTCODE
+function hownd_track_product_view() {
+    if ( ! is_singular( 'product' ) ) return;
+    global $post;
+    if ( empty( $_COOKIE['hownd_recently_viewed'] ) ) {
+    $viewed_products = array();
+    } else {
+    $viewed_products = wp_parse_id_list( (array) explode( '|', wp_unslash( $_COOKIE['hownd_recently_viewed'] ) ) );
+    }
+    $keys = array_flip( $viewed_products );
+    if ( isset( $keys[ $post->ID ] ) ) {
+        unset( $viewed_products[ $keys[ $post->ID ] ] );
+    }
+    $viewed_products[] = $post->ID;
+    if ( count( $viewed_products ) > 15 ) {
+        array_shift( $viewed_products );
+    }
+    wc_setcookie( 'hownd_recently_viewed', implode( '|', $viewed_products ) );
+}
+add_action( 'template_redirect', 'hownd_track_product_view', 9999 );
+
+function hownd_recently_viewed_shortcode() {
+    $viewed_products = ! empty( $_COOKIE['hownd_recently_viewed'] ) ? (array) explode( '|', wp_unslash( $_COOKIE['hownd_recently_viewed'] ) ) : array();
+    $viewed_products = array_reverse( array_filter( array_map( 'absint', $viewed_products ) ) );
+    if ( empty( $viewed_products ) ) return;
+    $title = '<h3>Recently Viewed</h3>';
+    $product_ids = implode( ",", $viewed_products );
+    return '<div class="hownd-recently-viewed">'. $title . do_shortcode("[products ids='$product_ids']") . '</div>';
+}
+add_shortcode( 'recently_viewed_products', 'hownd_recently_viewed_shortcode' );
+ 

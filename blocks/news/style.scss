@@ -2,5 +2,53 @@
 @import '../../assets/scss/abstract/mixins';
 
 .hownd-news {
-    
+    .news-wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+        padding: 10px;
+        background-color: $lgray9;
+    }
+
+    .item {
+        width: 25%;
+    }
+
+    .wrapper {
+        padding: 10px;
+    }
+
+    .news-title {
+        padding: 0 5px;
+        margin: 20px 0 15px;
+        font-weight: 900;
+        font-size: 16px;
+        text-align: center;
+    }
+
+    .news-description {
+        padding: 0 5px;
+        margin: 0 0 20px;
+        line-height: 1.15;
+        font-size: 16px;
+        text-align: center;
+    }
+
+    @media (max-width: 1199px) {
+        .item {
+            width: 33.33%;
+        }
+    }
+
+    @media (max-width: 991px) {
+        .item {
+            width: 50%;
+        }
+    }
+
+    @media (max-width: 575px) {
+        .item {
+            width: 100%;
+        }
+    }
 }

@@ -1,0 +1,21 @@
+
+.woocommerce .hownd-recently-viewed {
+    padding: 40px 30px;
+    background-color: $lgray9;
+
+    & > h3 {
+        text-align: center;
+        text-transform: uppercase;
+    }
+
+    ul.products {
+        margin: 0;
+        
+        li.product {
+            .add_to_cart_button,
+            .price {
+                display: none;
+            }
+        }
+    }
+}

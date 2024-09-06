@@ -21,11 +21,11 @@ else : ?>
     <?php if ( have_rows('hownd_news') ) : ?>
         <div <?php echo $wrapper_attributes; ?>>
             <div class="news-wrapper">
-                <div class="items">
-                    <?php while( have_rows('hownd_news') ): the_row(); 
-                        $image = get_sub_field( 'hownd_news_image' );
-                        ?>
-                        <div class="item">
+                <?php while( have_rows('hownd_news') ): the_row(); 
+                    $image = get_sub_field( 'hownd_news_image' );
+                    ?>
+                    <div class="item">
+                        <div class="wrapper">
                             <?php if( have_rows('description') ): ?>
                                 <?php while( have_rows('description') ): the_row(); ?>
                                     <?php if( get_sub_field('hownd_news_link') ): ?>
@@ -38,12 +38,12 @@ else : ?>
                                         </div>
                                     <?php endif; ?>
                                     <p class="news-title"><?php echo get_sub_field( 'hownd_news_title' ); ?></p>
-                                     <p class="news-description"><?php echo get_sub_field( 'hownd_news_description' ); ?></p>
+                                        <p class="news-description"><?php echo get_sub_field( 'hownd_news_description' ); ?></p>
                                 <?php endwhile; ?>
                             <?php endif; ?>
                         </div>
-                    <?php endwhile; ?>
-                </ul>
+                    </div>
+                <?php endwhile; ?>
             </div>
         </div>
     <?php endif; ?>
