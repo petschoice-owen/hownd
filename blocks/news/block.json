@@ -1,0 +1,30 @@
+{
+    "name": "hownd-news",
+    "title": "Hownd - News",
+    "description": "List of all featured news (dedicated for News page)",
+    "style": "block-news",
+    "category": "hownd-blocks",
+    "icon": "cover-image",
+    "apiVersion": 2,
+    "keywords": ["news", "featured", "featured news",  "as seen"],
+    "acf": {
+        "mode": "edit",
+	    "renderTemplate": "news.php"
+    },
+    "styles": [],
+    "supports": {
+        "anchor": true,
+        "align": false,
+        "multiple": false
+    },
+    "attributes": {
+    },
+    "example": {
+        "attributes": {
+            "mode": "preview",
+            "data": {
+                "preview_news": true
+            }
+        }
+    }
+}
