@@ -29,7 +29,7 @@ else : ?>
                             <?php if( have_rows('description') ): ?>
                                 <?php while( have_rows('description') ): the_row(); ?>
                                     <?php if( get_sub_field('hownd_news_link') ): ?>
-                                        <a href="<?php echo get_sub_field( 'hownd_news_link' ); ?>" class="news-link">
+                                        <a href="<?php echo get_sub_field( 'hownd_news_link' ); ?>" class="news-link" target="_blank">
                                             <img src="<?php echo $image; ?>" class="news-image" alt="<?php echo get_sub_field( 'hownd_news_title' ); ?>" />
                                         </a>
                                     <?php else: ?>
