@@ -58,8 +58,10 @@ ul.is-style-paws {
     }
 }
 
-b, strong {
-    font-family: 'Gotham Medium';
+p, div {
+    & > b, & > strong {
+        font-family: 'Gotham Medium';
+    }
 }
 
 @include respond-to(lg-down) {

@@ -189,7 +189,34 @@ function hownd_recently_viewed_shortcode() {
     if ( empty( $viewed_products ) ) return;
     $title = '<h3>Recently Viewed</h3>';
     $product_ids = implode( ",", $viewed_products );
-    return '<div class="hownd-recently-viewed">'. $title . do_shortcode("[products ids='$product_ids']") . '</div>';
+    return '<div class="hownd-recently-viewed">'. $title . do_shortcode("[products ids='$product_ids' columns='4' limit='4']") . '</div>';
 }
 add_shortcode( 'recently_viewed_products', 'hownd_recently_viewed_shortcode' );
- 
+
+
+//cart counter
+add_filter( 'woocommerce_add_to_cart_fragments', 'hownd_custom_cart_count_fragment' );
+function hownd_custom_cart_count_fragment ($fragments ) {
+    ob_start();
+    $cart_count = WC()->cart->get_cart_contents_count();
+    ?>
+        <a href="#" class="header__cart-count">
+            <svg width="13px" height="16px" viewBox="0 0 13 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <!-- Generator: Sketch 63.1 (92452) - https://sketch.com -->
+                <title>cart icon</title>
+                <desc>Created with Sketch.</desc>
+                <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                    <g id="cart-icon" transform="translate(1.000000, 1.000000)" stroke="#000000" stroke-width="1.8">
+                        <g>
+                            <path d="M0,4.14285714 L11,4.14285714 L11,12.9519759 C11,13.5042606 10.5522847,13.9519759 10,13.9519759 L1,13.9519759 C0.44771525,13.9519759 6.76353751e-17,13.5042606 0,12.9519759 L0,4.14285714 L0,4.14285714 Z" id="Path-2"></path>
+                            <path d="M2,4.14285714 L2,2.78056875 C2.6420657,0.92685625 3.80873237,-1.0658141e-14 5.5,-1.0658141e-14 C7.19126763,-1.0658141e-14 8.3579343,0.92685625 9,2.78056875 L9,4.14285714" id="Path-3"></path>
+                        </g>
+                    </g>
+                </g>
+            </svg>
+            <span class="count"><?php echo esc_html( $cart_count ); ?></span>
+        </a>
+    <?php
+    $fragments['.header__cart-count'] = ob_get_clean();
+    return $fragments;
+}

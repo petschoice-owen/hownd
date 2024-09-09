@@ -10,10 +10,11 @@
 
     ul.products {
         margin: 0;
-        
+
         li.product {
             .add_to_cart_button,
-            .price {
+            .price,
+            .badge-backsoon {
                 display: none;
             }
         }
