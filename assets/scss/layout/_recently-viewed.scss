@@ -1,5 +1,5 @@
 
-.hownd-recently-viewed {
+body .body__wrapper .hownd-recently-viewed {
     padding: 40px 30px;
     background-color: $lgray9;
 
@@ -9,13 +9,36 @@
     }
 
     ul.products {
-        margin: 0;
+        display: flex;
+        flex-wrap: wrap;
+        margin-right: -12px;
+        margin-left: -12px;
+        gap: 30px 0;
 
         li.product {
+            position: relative;
+            padding-right: 12px;
+            padding-left: 12px;
+            margin: 0;
+            flex: 0 0 50%;
+            width: 50%;
+
             .add_to_cart_button,
             .price,
             .badge-backsoon {
                 display: none !important;
+            }
+
+            .woocommerce-loop-product__title {
+                font-family: "Block Berthold Regular";
+                font-size: 20px;
+                color: $blue;
+                text-transform: uppercase;
+            }
+
+            @include respond-to(lg-up) {
+                flex: 0 0 25%;
+                width: 25%;
             }
         }
     }
