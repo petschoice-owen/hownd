@@ -47,6 +47,7 @@ add_theme_support( 'post-thumbnails' );
 add_theme_support( 'align-wide' );
 add_theme_support( 'editor-styles' );
 add_theme_support( 'custom-logo' );
+add_theme_support( 'widgets' );
 
 add_theme_support( 'woocommerce', array(
     'gallery_thumbnail_image_width' => 300,

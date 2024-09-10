@@ -615,6 +615,87 @@
                     "parent_repeater": "field_66d16d13c9759"
                 }
             ]
+        },
+        {
+            "key": "field_66df165a5985c",
+            "label": "Cart",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "left",
+            "endpoint": 0
+        },
+        {
+            "key": "field_66df16705985d",
+            "label": "Restricted Zone Message",
+            "name": "hownd_cart_restricted_zone_message",
+            "aria-label": "",
+            "type": "wysiwyg",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 0,
+            "delay": 0
+        },
+        {
+            "key": "field_66df16895985e",
+            "label": "Minimum Order Price",
+            "name": "hownd_minimum_order_price",
+            "aria-label": "",
+            "type": "number",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "min": "",
+            "max": "",
+            "placeholder": "",
+            "step": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_66df16a45985f",
+            "label": "Maximum Order Price",
+            "name": "hownd_maximum_order_price",
+            "aria-label": "",
+            "type": "number",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "min": "",
+            "max": "",
+            "placeholder": "",
+            "step": "",
+            "prepend": "",
+            "append": ""
         }
     ],
     "location": [
@@ -635,5 +716,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1725001322
+    "modified": 1725896384
 }

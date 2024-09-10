@@ -1,0 +1,97 @@
+
+.filter-flyout {
+    position: fixed;
+    top: 0;
+    right: -335px;
+    bottom: 0;
+    z-index: 999999;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+    max-width: 335px;
+    font-size: 16px;
+    color: $white;
+    background-color: $green;
+    transition: all .25s;
+
+    a {
+        color: $white;
+        text-decoration: none;
+    }
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+        padding: 20px;
+
+        h4 {
+            margin-bottom: 0;
+            font-size: 16px;
+        }
+    }
+
+    &__filters {
+        padding: 20px;
+        flex: 1;
+        overflow-y: auto;
+
+        .form-check-wrapper {
+            margin-bottom: 10px;
+
+            input {
+                display: none;
+
+                &:checked + label:before {
+                    content: "\f00c";
+                    color: $green;
+                    background-color: $white;
+                }
+            }
+
+            label {
+                position: relative;
+                padding-left: 22px;
+                font-family: 'Block Berthold Regular';
+                cursor: pointer;
+
+                &:before {
+                    content: '';
+                    position: absolute;
+                    top: 6px;
+                    left: 0;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    width: 10px;
+                    height: 10px;
+                    font-family: 'Font Awesome 6 Free';
+                    font-size: 9px;
+                    font-weight: 900;
+                    background-color: $gray6;
+                }
+            }
+        }
+    }
+
+    &__bottom {
+        padding: 20px;
+        justify-self: flex-end;
+        border-top: 1px solid $gray3;
+
+        .btn-primary {
+            width: 100%;
+            font-size: 14px;
+            color: $blue;
+            border: 0;
+            appearance: none;
+        }
+    }
+
+    &.open {
+        right: 0;
+        transition: all .25s;
+    }
+}

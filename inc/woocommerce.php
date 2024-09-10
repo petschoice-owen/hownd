@@ -139,12 +139,12 @@ add_action( 'init', 'hownd_remove_breadcrumbs' );
 
 //QUANTITY PLUS MINUS
 function hownd_display_quantity_minus() {
-    if ( ! is_product() ) return;
+    if ( ! is_product() && !is_cart() ) return;
     echo '<span class="minus-btn">-</span>';
  }
  add_action( 'woocommerce_before_quantity_input_field', 'hownd_display_quantity_minus' );
  function hownd_display_quantity_plus() {
-    if ( ! is_product() ) return;
+    if ( ! is_product() && !is_cart() ) return;
     echo '<span class="plus-btn">+</span>';
  }
  add_action( 'woocommerce_after_quantity_input_field', 'hownd_display_quantity_plus' );
@@ -189,7 +189,67 @@ function hownd_recently_viewed_shortcode() {
     if ( empty( $viewed_products ) ) return;
     $title = '<h3>Recently Viewed</h3>';
     $product_ids = implode( ",", $viewed_products );
-    return '<div class="hownd-recently-viewed">'. $title . do_shortcode("[products ids='$product_ids']") . '</div>';
+    return '<div class="hownd-recently-viewed">'. $title . do_shortcode("[products ids='$product_ids' columns='4' limit='4']") . '</div>';
 }
 add_shortcode( 'recently_viewed_products', 'hownd_recently_viewed_shortcode' );
- 
+
+function hownd_recently_viewed_v2_shortcode() {
+    $viewed_products = ! empty( $_COOKIE['hownd_recently_viewed'] ) ? (array) explode( '|', wp_unslash( $_COOKIE['hownd_recently_viewed'] ) ) : array();
+    $viewed_products = array_reverse( array_filter( array_map( 'absint', $viewed_products ) ) );
+    if ( empty( $viewed_products ) ) return;
+   
+    echo '<div class="hownd-recently-viewed--v2">';
+        foreach($viewed_products as $product_id) {
+            $_product = wc_get_product( $product_id );
+            echo '<div class="item">';
+                echo '<div class="item__image">'. $_product->get_image() .'</div>';
+                echo '<div class="item__details">';
+                    echo '<h3 class="item__title">'. $_product->get_name() .'</h3>';
+                    echo '<div class="item__price">'. $_product->get_price_html() . '</div>';
+                    echo '<a href="'. $_product->get_permalink() .'" class="item__link">View the full product</a>';
+                echo '</div>';
+            echo '</div>';
+        }
+    echo '</div>';
+}
+add_shortcode( 'recently_viewed_products_v2', 'hownd_recently_viewed_v2_shortcode' );
+
+
+//cart counter
+function hownd_custom_cart_count_fragment ($fragments ) {
+    ob_start();
+    $cart_count = WC()->cart->get_cart_contents_count();
+    ?>
+        <a href="#" class="header__cart-count">
+            <svg width="13px" height="16px" viewBox="0 0 13 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <!-- Generator: Sketch 63.1 (92452) - https://sketch.com -->
+                <title>cart icon</title>
+                <desc>Created with Sketch.</desc>
+                <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                    <g id="cart-icon" transform="translate(1.000000, 1.000000)" stroke="#000000" stroke-width="1.8">
+                        <g>
+                            <path d="M0,4.14285714 L11,4.14285714 L11,12.9519759 C11,13.5042606 10.5522847,13.9519759 10,13.9519759 L1,13.9519759 C0.44771525,13.9519759 6.76353751e-17,13.5042606 0,12.9519759 L0,4.14285714 L0,4.14285714 Z" id="Path-2"></path>
+                            <path d="M2,4.14285714 L2,2.78056875 C2.6420657,0.92685625 3.80873237,-1.0658141e-14 5.5,-1.0658141e-14 C7.19126763,-1.0658141e-14 8.3579343,0.92685625 9,2.78056875 L9,4.14285714" id="Path-3"></path>
+                        </g>
+                    </g>
+                </g>
+            </svg>
+            <span class="count"><?php echo esc_html( $cart_count ); ?></span>
+        </a>
+    <?php
+    $fragments['.header__cart-count'] = ob_get_clean();
+    return $fragments;
+}
+add_filter( 'woocommerce_add_to_cart_fragments', 'hownd_custom_cart_count_fragment' );
+
+function hownd_update_mini_cart_fragments( $fragments ) {
+    ob_start();
+    ?>
+    <div class="minicart-content">
+        <?php woocommerce_mini_cart(); ?>
+    </div>
+    <?php
+    $fragments['div.minicart-content'] = ob_get_clean();
+    return $fragments;
+}
+add_filter( 'woocommerce_add_to_cart_fragments', 'hownd_update_mini_cart_fragments' );

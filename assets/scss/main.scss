@@ -19,7 +19,8 @@
 // 4. Components
 @import
   'components/button',
-  'components/form';
+  'components/form',
+  'components/quickcart';
 
 // 5. Layout-related sections
 @import
@@ -27,10 +28,12 @@
   'layout/footer',
   'layout/gutenberg',
   'layout/global',
-  'layout/recently-viewed';
+  'layout/recently-viewed',
+  'layout/filter-flyout';
 
   // 5. Pages
 @import
   'pages/product',
   'pages/shop',
+  'pages/cart-checkout',
   'pages/blogs';
