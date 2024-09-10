@@ -187,7 +187,7 @@ jQuery(function($) {
     };
 
     const filterFlyout = () => {
-        $(document).on('click', '.js-filter-trigger', function(e) {
+        $('body').on('click', '.js-filter-trigger', function(e) {
             e.preventDefault();
 
             var id = $(this).attr('href');
@@ -195,7 +195,7 @@ jQuery(function($) {
             $(id).toggleClass('open');
         });
 
-        $(document).on('click', '.filter-flyout__close', function(e) {
+        $('body').on('click', '.filter-flyout__close', function(e) {
             e.preventDefault();
             $(this).closest('.filter-flyout').removeClass('open');
         });
@@ -212,6 +212,9 @@ jQuery(function($) {
             if (orderby) {
                 url += '&orderby=' + encodeURIComponent(orderby);
             }
+            if($('.shop-actions__view a.active').length > 0) {
+                url += '&products_per_page=' + $('.shop-actions__view a.active').text();
+            }
             window.location.href = url;
         });
     
@@ -225,7 +228,22 @@ jQuery(function($) {
             if (orderby) {
                 url += '&orderby=' + encodeURIComponent(orderby);
             }
+            if($('.shop-actions__view a.active').length > 0) {
+                url += '&products_per_page=' + $('.shop-actions__view a.active').text();
+            }
             window.location.href = url;
+        });
+    };
+
+    const miniCart = () => {
+        $('body').on('click', '.header__cart-count', function(e) {
+            e.preventDefault();
+            $('.header__quickcart').addClass('open');
+        });
+
+        $('body').on('click', '.header__quickcart-overlay, .header__quickcart-close', function(e) {
+            e.preventDefault();
+            $('.header__quickcart').removeClass('open');
         });
     };
 
@@ -236,4 +254,5 @@ jQuery(function($) {
     productAccordion();
     addToCart();
     filterFlyout();
+    miniCart();
 });

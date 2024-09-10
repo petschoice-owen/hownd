@@ -139,12 +139,12 @@ add_action( 'init', 'hownd_remove_breadcrumbs' );
 
 //QUANTITY PLUS MINUS
 function hownd_display_quantity_minus() {
-    if ( ! is_product() ) return;
+    if ( ! is_product() && !is_cart() ) return;
     echo '<span class="minus-btn">-</span>';
  }
  add_action( 'woocommerce_before_quantity_input_field', 'hownd_display_quantity_minus' );
  function hownd_display_quantity_plus() {
-    if ( ! is_product() ) return;
+    if ( ! is_product() && !is_cart() ) return;
     echo '<span class="plus-btn">+</span>';
  }
  add_action( 'woocommerce_after_quantity_input_field', 'hownd_display_quantity_plus' );
@@ -193,9 +193,29 @@ function hownd_recently_viewed_shortcode() {
 }
 add_shortcode( 'recently_viewed_products', 'hownd_recently_viewed_shortcode' );
 
+function hownd_recently_viewed_v2_shortcode() {
+    $viewed_products = ! empty( $_COOKIE['hownd_recently_viewed'] ) ? (array) explode( '|', wp_unslash( $_COOKIE['hownd_recently_viewed'] ) ) : array();
+    $viewed_products = array_reverse( array_filter( array_map( 'absint', $viewed_products ) ) );
+    if ( empty( $viewed_products ) ) return;
+   
+    echo '<div class="hownd-recently-viewed--v2">';
+        foreach($viewed_products as $product_id) {
+            $_product = wc_get_product( $product_id );
+            echo '<div class="item">';
+                echo '<div class="item__image">'. $_product->get_image() .'</div>';
+                echo '<div class="item__details">';
+                    echo '<h3 class="item__title">'. $_product->get_name() .'</h3>';
+                    echo '<div class="item__price">'. $_product->get_price_html() . '</div>';
+                    echo '<a href="'. $_product->get_permalink() .'" class="item__link">View the full product</a>';
+                echo '</div>';
+            echo '</div>';
+        }
+    echo '</div>';
+}
+add_shortcode( 'recently_viewed_products_v2', 'hownd_recently_viewed_v2_shortcode' );
+
 
 //cart counter
-add_filter( 'woocommerce_add_to_cart_fragments', 'hownd_custom_cart_count_fragment' );
 function hownd_custom_cart_count_fragment ($fragments ) {
     ob_start();
     $cart_count = WC()->cart->get_cart_contents_count();
@@ -220,3 +240,16 @@ function hownd_custom_cart_count_fragment ($fragments ) {
     $fragments['.header__cart-count'] = ob_get_clean();
     return $fragments;
 }
+add_filter( 'woocommerce_add_to_cart_fragments', 'hownd_custom_cart_count_fragment' );
+
+function hownd_update_mini_cart_fragments( $fragments ) {
+    ob_start();
+    ?>
+    <div class="minicart-content">
+        <?php woocommerce_mini_cart(); ?>
+    </div>
+    <?php
+    $fragments['div.minicart-content'] = ob_get_clean();
+    return $fragments;
+}
+add_filter( 'woocommerce_add_to_cart_fragments', 'hownd_update_mini_cart_fragments' );

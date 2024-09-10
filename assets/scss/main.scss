@@ -19,7 +19,8 @@
 // 4. Components
 @import
   'components/button',
-  'components/form';
+  'components/form',
+  'components/quickcart';
 
 // 5. Layout-related sections
 @import
@@ -33,4 +34,5 @@
   // 5. Pages
 @import
 'pages/product',
-'pages/shop';
+'pages/shop',
+'pages/cart-checkout';

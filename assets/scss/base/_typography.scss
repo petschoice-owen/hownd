@@ -64,6 +64,10 @@ p, div {
     }
 }
 
+a {
+    color: $primary;
+}
+
 @include respond-to(lg-down) {
     h1,h2 {
         font-size: 35px;
