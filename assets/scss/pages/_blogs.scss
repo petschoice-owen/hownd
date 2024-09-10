@@ -1,0 +1,30 @@
+
+.blog {
+    .intro {
+        display: flex;
+        justify-content: center;
+        padding-top: 50px;
+
+        h1 {
+            text-transform: uppercase;
+        }
+    }
+
+    .blog-categories {
+        display: flex;
+        justify-content: center;
+        list-style: none;
+        padding: 0 0 40px;
+        margin: 0;
+
+        li {
+            margin: 0 15px;
+        }
+
+        a {
+            font-family: 'Block Berthold Regular';
+            text-decoration: none;
+            text-transform: uppercase;
+        }
+    }
+}
