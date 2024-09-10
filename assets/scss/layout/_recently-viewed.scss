@@ -1,5 +1,5 @@
 
-.woocommerce .hownd-recently-viewed {
+.hownd-recently-viewed {
     padding: 40px 30px;
     background-color: $lgray9;
 
@@ -15,7 +15,7 @@
             .add_to_cart_button,
             .price,
             .badge-backsoon {
-                display: none;
+                display: none !important;
             }
         }
     }
