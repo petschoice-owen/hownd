@@ -355,3 +355,10 @@ function hownd_hide_checkout_button_on_ajax() {
     <?php
 }
 add_action( 'wp_footer', 'hownd_hide_checkout_button_on_ajax' );
+
+//ACCOUNT
+function hownd_my_account_items( $items ) {
+    unset($items['downloads']);
+    return $items;
+}
+add_filter( 'woocommerce_account_menu_items', 'hownd_my_account_items' );

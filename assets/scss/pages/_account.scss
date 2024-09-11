@@ -1,0 +1,167 @@
+
+.woocommerce-account {
+    .body__wrapper {
+        background-color: $lgray2;
+    }
+    
+    main {
+        padding-top: 50px;
+        padding-bottom: 50px;
+
+        & > .container > .woocommerce {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+    
+            &:before,
+            &:after {
+                display: none;
+            }
+        }
+
+        .woocommerce-MyAccount-navigation {
+            flex: 0 0 100%;
+            width: 100%;
+
+            ul {
+                padding: 0;
+                list-style: none;
+            }
+
+            li {
+                margin-bottom: 8px;
+
+                &.is-active a {
+                    color: $white;
+                    background-color: $primary;
+                }
+            }
+
+            .woocommerce-MyAccount-navigation-link--customer-logout a:after {
+                content: '\f2f5';
+            }
+
+            a {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 10px 15px;
+                width: 100%;
+                font-size: 16px;
+                color: $blue;
+                text-decoration: none;
+                background-color: $white;
+                border-radius: 5px;
+
+                &:after {
+                    content: '\f105';
+                    font-family: 'Font Awesome 6 Free';
+                    font-size: 14px;
+                    font-weight: 900;
+                }
+
+                &:hover {
+                    color: $white;
+                    background-color: $primary;
+                }
+            }
+        }
+
+        .woocommerce-MyAccount-content {
+            flex: 0 0 100%;
+            padding: 15px;
+            width: 100%;
+            font-size: 16px;
+            background-color: $white;
+            border-radius: 5px;
+
+            .woocommerce-info {
+                display: flex;
+                flex-wrap: wrap;
+                align-items: center;
+                gap: 10px;
+                padding: 10px 15px;
+                border: 0;
+
+                &:before,
+                &:after {
+                    display: none;
+                }
+
+                .button {
+                    @extend .btn-primary2;
+                    margin-left: auto;
+                    min-width: 0;
+                    font-size: 14px;
+                }
+            }
+
+            .button {
+                @extend .btn-primary2;
+                font-size: 14px;
+
+                @include on-event() {
+                    background-color: $primary;
+                }
+            }
+
+            table thead th {
+                font-family: 'Gotham Medium';
+            }
+
+            form {
+                .input-text,
+                .select2-container.select2-container--default .select2-selection--single {
+                    border: 1px solid $black;
+                    box-shadow: none;
+                }
+
+                em {
+                    font-size: 12px;
+                }
+
+                fieldset {
+                    margin-top: 10px;
+                    margin-bottom: 10px;
+                }
+            }
+
+            .woocommerce-Addresses .woocommerce-Address {
+                float: none;
+                width: 100%;
+
+                .title .edit {
+                    padding: 5px 10px;
+                    min-width: 150px;
+                    font-size: 12px;
+                    color: $white;
+                    text-align: center;
+                    text-decoration: none;
+                    background-color: $green;
+                    border-radius: 50px;
+                }
+
+                & + .woocommerce-Address {
+                    padding-top: 15px;
+                    margin-top: 30px;
+                    border-top: 1px solid $blue;
+                }
+            }
+        }
+    }
+
+    @include respond-to(lg-up) {
+        main {
+            .woocommerce-MyAccount-navigation {
+                flex: 0 0 30%;
+                width: 30%;
+            }
+    
+            .woocommerce-MyAccount-content {
+                order: -1;
+                flex: 0 0 65%;
+                width: 65%;
+            }
+        }
+    }
+}
