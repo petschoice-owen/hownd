@@ -253,3 +253,105 @@ function hownd_update_mini_cart_fragments( $fragments ) {
     return $fragments;
 }
 add_filter( 'woocommerce_add_to_cart_fragments', 'hownd_update_mini_cart_fragments' );
+
+//CART|CHECKOUT
+function hownd_min_max_order_notice() {
+    if ( ! is_cart() && ! is_checkout() ) return; // Show notice only on cart and checkout pages
+    $minimum_order_amount = get_field( 'hownd_minimum_order_price', 'option' );
+    $maximum_order_amount = get_field( 'hownd_maximum_order_price', 'option' );
+    $cart_total = WC()->cart->get_cart_contents_total();
+    $cart_total = floatval($cart_total);
+    if($min_price || $max_price) {
+        if ( $cart_total < $minimum_order_amount ) {
+            wc_print_notice(
+                sprintf( 'Your cart total is below the minimum amount of %s. Please add more products to reach the minimum amount.', wc_price($minimum_order_amount) ),
+                'error'
+            );
+        } elseif ( $cart_total > $maximum_order_amount ) {
+            wc_print_notice(
+                sprintf( 'Your cart total exceeds the maximum amount of %s. Please remove some products to reduce the total amount.', wc_price($maximum_order_amount) ),
+                'error'
+            );
+        }
+    }
+}
+add_action( 'woocommerce_before_cart', 'hownd_min_max_order_notice' );
+add_action( 'woocommerce_before_checkout_form', 'hownd_min_max_order_notice' );
+
+// Hide the checkout button if conditions are not met
+function hownd_hide_checkout_button_based_on_conditions() {
+    $minimum_order_amount = get_field( 'hownd_minimum_order_price', 'option' );
+    $maximum_order_amount = get_field( 'hownd_maximum_order_price', 'option' );
+
+    $cart_total = WC()->cart->get_cart_contents_total();
+    $cart_total = floatval($cart_total);
+
+    $hide_checkout_button = false;
+
+    if ( $cart_total < $minimum_order_amount || $cart_total > $maximum_order_amount ) {
+        $hide_checkout_button = true;
+    }
+
+    // Check if a restricted shipping method is selected
+    $chosen_shipping_methods = WC()->session->get('chosen_shipping_methods');
+    if ( $chosen_shipping_methods && get_field( 'hownd_cart_restricted_zone_message', 'option' ) ) {
+        foreach ($shipping_methods as $package) {
+            foreach ($package['rates'] as $rate) {
+                if ($rate->label === 'Restricted Zone') {
+                    $hide_checkout_button = true;
+                break;
+                }
+            }
+        }
+
+    }
+
+    if ( $hide_checkout_button ) {
+        add_filter( 'woocommerce_is_purchasable', '__return_false' );
+    }
+}
+add_action( 'woocommerce_before_checkout_form', 'hownd_hide_checkout_button_based_on_conditions', 5 );
+
+// Ensure checkout button visibility is updated on AJAX cart update
+function hownd_hide_checkout_button_on_ajax() {
+    $minimum_order_amount = get_field( 'hownd_minimum_order_price', 'option' );
+    $maximum_order_amount = get_field( 'hownd_maximum_order_price', 'option' );
+    $has_restricted_message = get_field( 'hownd_cart_restricted_zone_message', 'option' ) ? true : false;
+    ?>
+    <script type="text/javascript">
+    jQuery( function( $ ) {
+        function updateCheckoutButton() {
+            var minimum_order_amount = <?php echo $minimum_order_amount; ?>;
+            var maximum_order_amount = <?php echo $maximum_order_amount; ?>;
+            var cart_total = parseFloat( $( '.cart-subtotal .amount' ).text().replace( /[^\d.]/g, '' ) );
+            var restricted_zone_selected = false;
+            var shippingMethod = $('#shipping_method').text().trim();
+            if ( ( !shippingMethod || shippingMethod.includes("Restricted Zone") ) && has_restricted_message ) {
+                restricted_zone_selected = true;
+            }
+
+            if ( cart_total < minimum_order_amount || cart_total > maximum_order_amount || restricted_zone_selected ) {
+                $( '.wc-proceed-to-checkout' ).hide();
+                if(restricted_zone_selected) {
+                    $('.restricted-zone-message').show();
+                }
+            } else {
+                $( '.wc-proceed-to-checkout' ).show();
+                if(restricted_zone_selected) {
+                    $('.restricted-zone-message').hide();
+                }
+            }
+        }
+
+        // Initial check on page load
+        updateCheckoutButton();
+
+        // Update on cart update
+        $( document.body ).on( 'updated_cart_totals', function() {
+            updateCheckoutButton();
+        });
+    });
+    </script>
+    <?php
+}
+add_action( 'wp_footer', 'hownd_hide_checkout_button_on_ajax' );

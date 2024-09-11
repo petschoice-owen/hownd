@@ -101,3 +101,9 @@
     color: $blue;
     background-color: $yellow2;
 }
+
+.btn-primary2 {
+    @extend %btn;
+    color: $blue;
+    background-color: $primary;
+}
