@@ -1,0 +1,100 @@
+
+.woocommerce-error {
+    font-size: 14px;
+    color: $black;
+    background-color: rgba(182,83,76,.3);
+    border: 0;
+}
+
+.woocommerce-lost-password {
+    main > h2 {
+        display: none;
+    }
+
+    .body__wrapper {
+        background-color: $white;
+    }
+
+    .hownd-login-form form .form-row {
+        float: none;
+        width: 100%;
+
+        label {
+            display: none;
+        }
+
+        .btn-primary2 {
+            color: $blue;
+            background-color: $primary;
+        }
+    }
+}
+
+.hownd-login-form {
+    padding: 20px;
+    margin: auto;
+    max-width: 460px;
+    font-size: 16px;
+    text-align: center;
+    background-color: $lgray9;
+
+    a {
+        color: $gray4;
+    }
+
+    label:not(.woocommerce-form-login__rememberme) {
+        display: none;
+    }
+
+    .input-text {
+        width: 100%;
+    }
+
+    .btn-primary2 {
+        width: 100%;
+        font-size: 14px;
+        border: 0;
+    }
+}
+
+.hownd-registration-form {
+    padding: 20px;
+    font-size: 16px;
+    border-radius: 23px;
+    background-color: $lgray9;
+    box-shadow: 0 0 8px 0;
+
+    h2 {
+        color: $primary;
+        text-align: center;
+        text-transform: uppercase;
+    }
+
+    label {
+        display: none;
+    }
+
+    .input-text {
+        width: 100%;
+    }
+
+    .btn-primary2 {
+        margin: auto;
+        font-size: 14px;
+        border: 0;
+    }
+}
+
+@include respond-to(md-up) {
+    .hownd-login-form {
+        padding: 40px;
+    }
+
+    .hownd-registration-form {
+        padding: 40px;
+
+        h2 {
+            font-size: 60px;
+        }
+    }
+}

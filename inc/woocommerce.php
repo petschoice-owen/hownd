@@ -362,3 +362,86 @@ function hownd_my_account_items( $items ) {
     return $items;
 }
 add_filter( 'woocommerce_account_menu_items', 'hownd_my_account_items' );
+
+//Registration Shortcode
+function hownd_separate_registration_form() {
+    if ( is_user_logged_in() ) {
+        return '<p>' . esc_html__('You are already registered', 'text-domain') . '</p>';
+    }
+
+    ob_start();
+    do_action( 'woocommerce_before_customer_login_form' );
+    ?>
+        <div class="hownd-registration-form">
+            <form method="post" class="woocommerce-form woocommerce-form-register register" <?php do_action( 'woocommerce_register_form_tag' ); ?> >
+                <h2>Create Account</h2>
+                <?php do_action( 'woocommerce_register_form_start' ); ?>
+
+                <?php if ( 'no' === get_option( 'woocommerce_registration_generate_username' ) ) : ?>
+
+                    <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
+                        <label for="reg_username"><?php esc_html_e( 'Username', 'woocommerce' ); ?>&nbsp;<span class="required" aria-hidden="true">*</span><span class="screen-reader-text"><?php esc_html_e( 'Required', 'woocommerce' ); ?></span></label>
+                        <input type="text" class="woocommerce-Input woocommerce-Input--text input-text" name="username" id="reg_username" autocomplete="username" value="<?php echo ( ! empty( $_POST['username'] ) ) ? esc_attr( wp_unslash( $_POST['username'] ) ) : ''; ?>" required aria-required="true" /><?php // @codingStandardsIgnoreLine ?>
+                    </p>
+
+                <?php endif; ?>
+
+                <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
+                    <label for="reg_email"><?php esc_html_e( 'Email address', 'woocommerce' ); ?>&nbsp;<span class="required" aria-hidden="true">*</span><span class="screen-reader-text"><?php esc_html_e( 'Required', 'woocommerce' ); ?></span></label>
+                    <input type="email" class="woocommerce-Input woocommerce-Input--text input-text" name="email" id="reg_email" autocomplete="email" value="<?php echo ( ! empty( $_POST['email'] ) ) ? esc_attr( wp_unslash( $_POST['email'] ) ) : ''; ?>" required aria-required="true" placeholder="Email" /><?php // @codingStandardsIgnoreLine ?>
+                </p>
+
+                <?php if ( 'no' === get_option( 'woocommerce_registration_generate_password' ) ) : ?>
+
+                    <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
+                        <label for="reg_password"><?php esc_html_e( 'Password', 'woocommerce' ); ?>&nbsp;<span class="required" aria-hidden="true">*</span><span class="screen-reader-text"><?php esc_html_e( 'Required', 'woocommerce' ); ?></span></label>
+                        <input type="password" class="woocommerce-Input woocommerce-Input--text input-text" name="password" id="reg_password" autocomplete="new-password" required aria-required="true" placeholder="Password" />
+                    </p>
+
+                <?php else : ?>
+
+                    <p><?php esc_html_e( 'A link to set a new password will be sent to your email address.', 'woocommerce' ); ?></p>
+
+                <?php endif; ?>
+
+                <?php do_action( 'woocommerce_register_form' ); ?>
+
+                <p class="woocommerce-form-row form-row text-center">
+                    <?php wp_nonce_field( 'woocommerce-register', 'woocommerce-register-nonce' ); ?>
+                    <button type="submit" class="btn-primary2 woocommerce-Button woocommerce-button button<?php echo esc_attr( wc_wp_theme_get_element_class_name( 'button' ) ? ' ' . wc_wp_theme_get_element_class_name( 'button' ) : '' ); ?> woocommerce-form-register__submit" name="register" value="<?php esc_attr_e( 'Create', 'woocommerce' ); ?>"><?php esc_html_e( 'Create', 'woocommerce' ); ?></button>
+                </p>
+
+                <?php do_action( 'woocommerce_register_form_end' ); ?>
+
+            </form>
+        </div>
+    <?php
+    return ob_get_clean();
+}
+add_shortcode( 'hownd_registration_form', 'hownd_separate_registration_form' );
+
+//Login Shortcode
+function hownd_separate_login_form() {
+    if ( is_user_logged_in() ) return '<p>You are already logged in</p>'; 
+    ob_start();
+    do_action( 'woocommerce_before_customer_login_form' );
+    woocommerce_login_form( array( 'redirect' => wc_get_page_permalink( 'myaccount' ) ) );
+    return ob_get_clean();
+}
+add_shortcode( 'hownd_login_form', 'hownd_separate_login_form' );
+
+//redirect to myaccount if logged in
+function hownd_redirect_login_registration_if_logged_in() {
+    $current_url = home_url( add_query_arg( null, null ) );
+    $lost_password_url = wp_lostpassword_url();
+    if ( is_page() && is_user_logged_in() && ( has_shortcode( get_the_content(), 'hownd_login_form' ) || has_shortcode( get_the_content(), 'hownd_registration_form' ) ) ) {
+        wp_redirect( wc_get_page_permalink( 'myaccount' ) );
+        exit;
+    }elseif ( is_account_page() && !is_user_logged_in() ) {
+        if ( strpos( $current_url, $lost_password_url ) === false ) {
+            wp_redirect( wc_get_page_permalink( 'myaccount' ) . '/login' );
+            exit;
+        }
+    }
+}
+add_action( 'template_redirect', 'hownd_redirect_login_registration_if_logged_in' );
