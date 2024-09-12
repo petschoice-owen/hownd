@@ -37,31 +37,50 @@ get_header();
                     <?php the_post(); ?>
                     <div class="col-12 col-sm-6 col-md-4">
                         <div class="blog-preview">
-                            <?php $featured_img = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), 'full' ); ?>
+                            <?php $featured_img = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), 'medium' ); ?>
                             <a href="<?php the_permalink(); ?>" class="post-link">
-                                <div class="featured-image-wrapper">
-                                    <img src="<?php echo $featured_img[0]; ?>" class="featured-image" alt="<?php the_title(); ?>" />
-                                </div>
+                                <img src="<?php echo $featured_img[0]; ?>" class="featured-image" alt="<?php the_title(); ?>" />
                             </a>
                             <?php // $post_date = get_the_date( 'F jS Y' ); ?>
                             <!-- <div class="post-meta">
                                 <span class="date"><?php // echo $post_date; ?></span>
                             </div> -->
-                            <a href="<?php the_permalink(); ?>">
-                                <h4 class="post-title"><?php the_title(); ?></h4>
-                            </a>
-                            <?php
-                                // Check if the post has an excerpt
-                                if (has_excerpt()) { ?>
-                                    <p class="excerpt"><?php the_excerpt(); ?></p>
-                                <? }
-                                // else { the_content(); } 
-                            ?>
+                            <div class="blog-details">
+                                <a href="<?php the_permalink(); ?>">
+                                    <h4 class="post-title"><?php the_title(); ?></h4>
+                                </a>
+                                <div class="excerpt">
+                                    <?php
+                                        if (has_excerpt()) { 
+                                            $excerpt = get_the_excerpt(); 
+                                            echo '<p>' . (strlen($excerpt) > 200 ? substr($excerpt, 0, 200) . '...' : $excerpt) . '</p>';
+                                            ?>
+                                        <? }
+                                        else { 
+                                            $content = get_the_content();
+                                            echo (strlen($content) > 200 ? substr($content, 0, 200) . '...' : $content);
+                                        } 
+                                    ?>
+                                </div>
+                                <a href="<?php the_permalink(); ?>" class="read-more">Read More</a>
+                            </div>
                         </div>
                     </div>
                 <?php endwhile; ?>
                 <!-- pagination -->
-                <?php the_posts_pagination(); ?>
+                <div class="col-12">
+                    <div class="pagination-section">
+                        <?php 
+                            $total = $wp_query->found_posts;
+                            $current_page = ( get_query_var('paged') ) ? get_query_var('paged') : 1;
+                            $posts_per_page = get_query_var('posts_per_page');
+                            $start = ( $current_page - 1 ) * $posts_per_page + 1;
+                            $end = min( $current_page * $posts_per_page, $total );
+                            echo '<p>Showing ' . $start . '-' . $end . ' of ' . $total . ' results</p>';
+                        ?>
+                        <?php the_posts_pagination(); ?>
+                    </div>
+                </div>
                 <?php wp_reset_postdata(); ?>
             </div>
         </div>
