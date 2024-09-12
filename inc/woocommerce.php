@@ -445,3 +445,17 @@ function hownd_redirect_login_registration_if_logged_in() {
     }
 }
 add_action( 'template_redirect', 'hownd_redirect_login_registration_if_logged_in' );
+
+//add new user role
+function hownd_add_dog_owner_role() {
+    if (!get_role('dog_owner')) {
+        $customer_role = get_role('customer');
+
+        add_role(
+            'dog_owner',
+            'Dog Owner',
+            $customer_role->capabilities
+        );
+    }
+}
+add_action('init', 'hownd_add_dog_owner_role');
