@@ -32,9 +32,9 @@ class WP_bootstrap_4_walker_nav_menu extends Walker_Nav_menu {
 
         $output .= $title;
 
-        if( $description != '' && $depth == 0 ) {
-            $output .= '<small class="description">' . $description . '</small>';
-        }
+        // if( $description != '' && $depth == 0 ) {
+        //     $output .= '<small class="description">' . $description . '</small>';
+        // }
 
         if( $args->walker->has_children) {
             $output .= '<span class="nav-item__arrow"><svg xmlns="http://www.w3.org/2000/svg" width="26" height="20" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z" fill="currentColor"></path><path fill="none" d="M0 0h24v24H0V0z"></path></svg></span>';

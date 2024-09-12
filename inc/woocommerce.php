@@ -253,3 +253,195 @@ function hownd_update_mini_cart_fragments( $fragments ) {
     return $fragments;
 }
 add_filter( 'woocommerce_add_to_cart_fragments', 'hownd_update_mini_cart_fragments' );
+
+//CART|CHECKOUT
+function hownd_min_max_order_notice() {
+    if ( ! is_cart() && ! is_checkout() ) return; // Show notice only on cart and checkout pages
+    $minimum_order_amount = get_field( 'hownd_minimum_order_price', 'option' );
+    $maximum_order_amount = get_field( 'hownd_maximum_order_price', 'option' );
+    $cart_total = WC()->cart->get_cart_contents_total();
+    $cart_total = floatval($cart_total);
+    if($min_price || $max_price) {
+        if ( $cart_total < $minimum_order_amount ) {
+            wc_print_notice(
+                sprintf( 'Your cart total is below the minimum amount of %s. Please add more products to reach the minimum amount.', wc_price($minimum_order_amount) ),
+                'error'
+            );
+        } elseif ( $cart_total > $maximum_order_amount ) {
+            wc_print_notice(
+                sprintf( 'Your cart total exceeds the maximum amount of %s. Please remove some products to reduce the total amount.', wc_price($maximum_order_amount) ),
+                'error'
+            );
+        }
+    }
+}
+add_action( 'woocommerce_before_cart', 'hownd_min_max_order_notice' );
+add_action( 'woocommerce_before_checkout_form', 'hownd_min_max_order_notice' );
+
+// Hide the checkout button if conditions are not met
+function hownd_hide_checkout_button_based_on_conditions() {
+    $minimum_order_amount = get_field( 'hownd_minimum_order_price', 'option' );
+    $maximum_order_amount = get_field( 'hownd_maximum_order_price', 'option' );
+
+    $cart_total = WC()->cart->get_cart_contents_total();
+    $cart_total = floatval($cart_total);
+
+    $hide_checkout_button = false;
+
+    if ( $cart_total < $minimum_order_amount || $cart_total > $maximum_order_amount ) {
+        $hide_checkout_button = true;
+    }
+
+    // Check if a restricted shipping method is selected
+    $chosen_shipping_methods = WC()->session->get('chosen_shipping_methods');
+    if ( $chosen_shipping_methods && get_field( 'hownd_cart_restricted_zone_message', 'option' ) ) {
+        foreach ($shipping_methods as $package) {
+            foreach ($package['rates'] as $rate) {
+                if ($rate->label === 'Restricted Zone') {
+                    $hide_checkout_button = true;
+                break;
+                }
+            }
+        }
+
+    }
+
+    if ( $hide_checkout_button ) {
+        add_filter( 'woocommerce_is_purchasable', '__return_false' );
+    }
+}
+add_action( 'woocommerce_before_checkout_form', 'hownd_hide_checkout_button_based_on_conditions', 5 );
+
+// Ensure checkout button visibility is updated on AJAX cart update
+function hownd_hide_checkout_button_on_ajax() {
+    $minimum_order_amount = get_field( 'hownd_minimum_order_price', 'option' );
+    $maximum_order_amount = get_field( 'hownd_maximum_order_price', 'option' );
+    $has_restricted_message = get_field( 'hownd_cart_restricted_zone_message', 'option' ) ? true : false;
+    ?>
+    <script type="text/javascript">
+    jQuery( function( $ ) {
+        function updateCheckoutButton() {
+            var minimum_order_amount = <?php echo $minimum_order_amount; ?>;
+            var maximum_order_amount = <?php echo $maximum_order_amount; ?>;
+            var cart_total = parseFloat( $( '.cart-subtotal .amount' ).text().replace( /[^\d.]/g, '' ) );
+            var restricted_zone_selected = false;
+            var shippingMethod = $('#shipping_method').text().trim();
+            if ( ( !shippingMethod || shippingMethod.includes("Restricted Zone") ) && has_restricted_message ) {
+                restricted_zone_selected = true;
+            }
+
+            if ( cart_total < minimum_order_amount || cart_total > maximum_order_amount || restricted_zone_selected ) {
+                $( '.wc-proceed-to-checkout' ).hide();
+                if(restricted_zone_selected) {
+                    $('.restricted-zone-message').show();
+                }
+            } else {
+                $( '.wc-proceed-to-checkout' ).show();
+                if(restricted_zone_selected) {
+                    $('.restricted-zone-message').hide();
+                }
+            }
+        }
+
+        // Initial check on page load
+        updateCheckoutButton();
+
+        // Update on cart update
+        $( document.body ).on( 'updated_cart_totals', function() {
+            updateCheckoutButton();
+        });
+    });
+    </script>
+    <?php
+}
+add_action( 'wp_footer', 'hownd_hide_checkout_button_on_ajax' );
+
+//ACCOUNT
+function hownd_my_account_items( $items ) {
+    unset($items['downloads']);
+    return $items;
+}
+add_filter( 'woocommerce_account_menu_items', 'hownd_my_account_items' );
+
+//Registration Shortcode
+function hownd_separate_registration_form() {
+    if ( is_user_logged_in() ) {
+        return '<p>' . esc_html__('You are already registered', 'text-domain') . '</p>';
+    }
+
+    ob_start();
+    do_action( 'woocommerce_before_customer_login_form' );
+    ?>
+        <div class="hownd-registration-form">
+            <form method="post" class="woocommerce-form woocommerce-form-register register" <?php do_action( 'woocommerce_register_form_tag' ); ?> >
+                <h2>Create Account</h2>
+                <?php do_action( 'woocommerce_register_form_start' ); ?>
+
+                <?php if ( 'no' === get_option( 'woocommerce_registration_generate_username' ) ) : ?>
+
+                    <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
+                        <label for="reg_username"><?php esc_html_e( 'Username', 'woocommerce' ); ?>&nbsp;<span class="required" aria-hidden="true">*</span><span class="screen-reader-text"><?php esc_html_e( 'Required', 'woocommerce' ); ?></span></label>
+                        <input type="text" class="woocommerce-Input woocommerce-Input--text input-text" name="username" id="reg_username" autocomplete="username" value="<?php echo ( ! empty( $_POST['username'] ) ) ? esc_attr( wp_unslash( $_POST['username'] ) ) : ''; ?>" required aria-required="true" /><?php // @codingStandardsIgnoreLine ?>
+                    </p>
+
+                <?php endif; ?>
+
+                <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
+                    <label for="reg_email"><?php esc_html_e( 'Email address', 'woocommerce' ); ?>&nbsp;<span class="required" aria-hidden="true">*</span><span class="screen-reader-text"><?php esc_html_e( 'Required', 'woocommerce' ); ?></span></label>
+                    <input type="email" class="woocommerce-Input woocommerce-Input--text input-text" name="email" id="reg_email" autocomplete="email" value="<?php echo ( ! empty( $_POST['email'] ) ) ? esc_attr( wp_unslash( $_POST['email'] ) ) : ''; ?>" required aria-required="true" placeholder="Email" /><?php // @codingStandardsIgnoreLine ?>
+                </p>
+
+                <?php if ( 'no' === get_option( 'woocommerce_registration_generate_password' ) ) : ?>
+
+                    <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
+                        <label for="reg_password"><?php esc_html_e( 'Password', 'woocommerce' ); ?>&nbsp;<span class="required" aria-hidden="true">*</span><span class="screen-reader-text"><?php esc_html_e( 'Required', 'woocommerce' ); ?></span></label>
+                        <input type="password" class="woocommerce-Input woocommerce-Input--text input-text" name="password" id="reg_password" autocomplete="new-password" required aria-required="true" placeholder="Password" />
+                    </p>
+
+                <?php else : ?>
+
+                    <p><?php esc_html_e( 'A link to set a new password will be sent to your email address.', 'woocommerce' ); ?></p>
+
+                <?php endif; ?>
+
+                <?php do_action( 'woocommerce_register_form' ); ?>
+
+                <p class="woocommerce-form-row form-row text-center">
+                    <?php wp_nonce_field( 'woocommerce-register', 'woocommerce-register-nonce' ); ?>
+                    <button type="submit" class="btn-primary2 woocommerce-Button woocommerce-button button<?php echo esc_attr( wc_wp_theme_get_element_class_name( 'button' ) ? ' ' . wc_wp_theme_get_element_class_name( 'button' ) : '' ); ?> woocommerce-form-register__submit" name="register" value="<?php esc_attr_e( 'Create', 'woocommerce' ); ?>"><?php esc_html_e( 'Create', 'woocommerce' ); ?></button>
+                </p>
+
+                <?php do_action( 'woocommerce_register_form_end' ); ?>
+
+            </form>
+        </div>
+    <?php
+    return ob_get_clean();
+}
+add_shortcode( 'hownd_registration_form', 'hownd_separate_registration_form' );
+
+//Login Shortcode
+function hownd_separate_login_form() {
+    if ( is_user_logged_in() ) return '<p>You are already logged in</p>'; 
+    ob_start();
+    do_action( 'woocommerce_before_customer_login_form' );
+    woocommerce_login_form( array( 'redirect' => wc_get_page_permalink( 'myaccount' ) ) );
+    return ob_get_clean();
+}
+add_shortcode( 'hownd_login_form', 'hownd_separate_login_form' );
+
+//redirect to myaccount if logged in
+function hownd_redirect_login_registration_if_logged_in() {
+    $current_url = home_url( add_query_arg( null, null ) );
+    $lost_password_url = wp_lostpassword_url();
+    if ( is_page() && is_user_logged_in() && ( has_shortcode( get_the_content(), 'hownd_login_form' ) || has_shortcode( get_the_content(), 'hownd_registration_form' ) ) ) {
+        wp_redirect( wc_get_page_permalink( 'myaccount' ) );
+        exit;
+    }elseif ( is_account_page() && !is_user_logged_in() ) {
+        if ( strpos( $current_url, $lost_password_url ) === false ) {
+            wp_redirect( wc_get_page_permalink( 'myaccount' ) . '/login' );
+            exit;
+        }
+    }
+}
+add_action( 'template_redirect', 'hownd_redirect_login_registration_if_logged_in' );

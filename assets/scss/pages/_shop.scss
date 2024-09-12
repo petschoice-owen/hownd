@@ -261,6 +261,21 @@
             }
         }
     }
+
+    .woocommerce-no-products-found {
+        padding-top: 30px;
+
+        .woocommerce-info {
+            font-size: 14px;
+            text-align: center;
+            background: none;
+            border: 0;
+
+            &:before {
+                display: none;
+            }
+        }
+    }
 }
 
 @include respond-to(md-up) {

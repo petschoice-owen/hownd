@@ -1,5 +1,17 @@
 
 .woocommerce-page {
+    .restricted-zone-message {
+        display: none;
+        padding: 10px;
+        width: 100%;
+        font-size: 14px;
+        background-color: #ffdddb;
+
+        & > *:last-child {
+            margin-bottom: 0;
+        }
+    }
+
     &.woocommerce-cart {
         .shop_table {
             .cart_item {
@@ -117,6 +129,203 @@
         }
     }
 
+    &.woocommerce-checkout {
+        main {
+            padding-bottom: 100px;
+        }
+
+        input[type=email], input[type=tel], input[type=text], select,
+        textarea,
+        .select2-container.select2-container--default .select2-selection--single {
+            border: 1px solid $gray4;
+            box-shadow: none;
+        }
+
+        .woocommerce-form-coupon-toggle {
+            display: none !important;
+        }
+
+        form.woocommerce-form-coupon {
+            display: flex !important;
+            flex-wrap: wrap;
+            margin-top: 0;
+            color: $white;
+            background: $green;
+            border: 0;
+
+            p:not(.form-row-first):not(.form-row-last) {
+                flex: 0 0 100%;
+                width: 100%;
+            }
+
+            .form-row-first {
+                flex: 0 0 70%;
+            }
+
+            .form-row-last {
+                flex: 0 0 30%;
+
+                .button {
+                    @extend .btn-primary2;
+                    width: 100%;
+                    height: 100%;
+                    font-size: 14px;
+                }
+            }
+        }
+
+        .woocommerce-checkout__sidebar {
+            padding: 20px;
+            font-size: 16px;
+            background: $lgray2;
+
+            h3 {
+                padding-bottom: 5px;
+                margin-bottom: 10px;
+                font-size: 24px;
+                border-bottom: 1px solid $blue;
+            }
+
+            a {
+                color: $blue;
+            }
+        }
+
+        table.shop_table {
+            margin: 0 0 20px;
+            color: $blue;
+            border: 0;
+            border-radius: 0;
+            border-spacing: 0;
+
+            ul#shipping_method li:last-of-type {
+                margin-bottom: 0;
+            }
+
+            thead {
+                display: none;
+            }
+
+            th {
+                font-family: 'Gotham Medium';
+            }
+
+            td,th {
+                padding: 8px 0;
+                vertical-align: top;
+                border-color: $blue;
+
+                &:last-child {
+                    padding-left: 10px;
+                    text-align: right;
+                }
+            }
+            
+            tr.cart_item:first-of-type td {
+                border-top: 0;
+            }
+        }
+
+        #payment {
+            background: none;
+
+            div.payment_box {
+                flex: 0 0 100%;
+                background: $white !important;
+
+                &:before {
+                    top: auto;
+                    bottom: 100%;
+                    border-bottom-color: $white;
+                }
+            }
+
+            .wc-stripe_cc-new-method-container {
+                margin-bottom: 0;
+
+                @include respond-to(md) {
+                    .col-md-4 {
+                        flex: 0 0 50%;
+                        max-width: 50%;
+                    }
+                }
+            }
+
+            .wc-stripe-bootstrap-form .row:last-of-type > *:last-of-type {
+                margin-bottom: 5px !important;
+            }
+
+            ul.payment_methods {
+                padding: 0;
+                border-color: $blue;
+
+                li {
+                    display: flex;
+                    flex-wrap: wrap;
+
+                    input {
+                        margin-top: -2px;
+                        margin-right: 5px;
+                        height: 32px;
+                    }
+
+                    label {
+                        flex: 1;
+                        font-weight: 500;
+
+                        .wc-stripe-card-icons-container {
+                            float: none;
+
+                            img:first-child {
+                                margin-left: 0;
+                            }
+                        }
+
+                        img {
+                            float: none !important;
+                        }
+                    }
+                }
+            }
+
+            .place-order {
+                padding: 15px 0 0;
+                font-size: 14px;
+                color: $black;
+
+                a {
+                    color: $primary;
+                }
+            }
+
+            #place_order {
+                @extend .btn-primary2;
+                width: 100%;
+                font-size: 14px;
+
+                &.wc-stripe-hide {
+                    width: auto;
+                }
+            }
+        }
+
+        .form-row textarea {
+            height: 5em;
+            border-radius: 3px;
+        }
+
+        .woocommerce-additional-fields {
+            margin-top: 20px;
+
+            h3 {
+                margin-bottom: 5px;
+            }
+        }
+
+        form {
+            font-size: 16px;
+        }
+    }
 
     @include respond-to(md-up) {
         &.woocommerce-cart {
@@ -143,6 +352,41 @@
                     .product-remove {
                         flex: 0 0 calc((50% - 160px) / 2);
                     }
+                }
+            }
+        }
+    }
+
+    @media screen and (min-width: 769px) {
+        .restricted-zone-message {
+            margin-left: auto;
+            width: 48%;
+        }
+    }
+
+    @include respond-to(md-down) {
+        &.woocommerce-checkout {
+            .woocommerce-checkout__sidebar {
+                margin-top: 30px;
+            }
+        }
+    }
+
+    @include respond-to(sm-down) {
+        &.woocommerce-checkout {
+            form.woocommerce-form-coupon {
+                padding: 10px;
+
+                .form-row-first,
+                .form-row-last {
+                    flex: 0 0 100%;
+                }
+            }
+
+            form {
+                .form-row-first,
+                .form-row-last {
+                    width: 100%;
                 }
             }
         }
