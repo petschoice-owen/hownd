@@ -63,6 +63,8 @@ get_header();
                     </div>
                 </div>
                 <?php wp_reset_postdata(); ?>
+            <?php else : ?>
+                <p class="text-center">Please try a different search term or go back to the <a href="<?php echo home_url(); ?>">homepage</a>.</p>
             <?php endif; ?>
         </div>
     </div>
