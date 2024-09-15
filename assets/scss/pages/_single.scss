@@ -1,0 +1,125 @@
+
+.single-post {
+    .post-title {
+        margin: 70px 0 0;
+        text-align: center;
+    }
+
+    .date {
+        margin: 10px 0 0;
+        font-size: 14px;
+        text-align: center;
+    }
+
+    .content {
+        width: 100%;
+        max-width: 650px;
+        margin-top: 40px;
+        margin-left: auto;
+        margin-right: auto;
+
+        a {
+            color: $blue;
+            font-weight: 700;
+        }
+    }
+
+    .featured-image-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 40px;
+    }
+
+    .blog-preview {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+
+    .post-link {
+        display: flex;
+        width: 100%;
+        height: auto;
+
+        img {
+            width: 100%;
+        }
+    }
+
+    .blog-details {
+        position: relative;
+        flex-grow: 1;
+        padding: 20px;
+        margin-bottom: 24px;
+        background-color: $lgray9;
+
+        a {
+            color: $blue;
+            text-decoration: none;
+            text-transform: uppercase;
+        }
+
+        .post-title {
+            margin: 0 0 10px;
+            text-align: left;
+        }
+
+        .excerpt {
+            padding-bottom: 30px;
+            font-size: 16px;
+            line-height: 21px;
+
+            p {
+                margin: 0;
+                font-size: 16px;
+                line-height: 21px;
+            }
+        }
+
+        .read-more {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            font-family: 'Block Berthold Regular';
+            font-size: 15px;
+            line-height: 14px;
+            color: $blue3;
+            opacity: 0.7;
+            transition: .2s ease-in-out all;
+
+            &:hover {
+                opacity: .5;
+            }
+        }
+    }
+
+    .related-posts {
+        padding: 50px 0 30px;
+
+        .section-heading {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+    }
+
+    @media (max-width: 767px) {
+        .content {
+            max-width: 90%;
+        }
+
+        .related-posts {
+            max-width: 90%;
+            margin-left: auto;
+            margin-right: auto;
+
+            .col-12:last-child .blog-details {
+                margin-bottom: 0;
+            }
+        }
+
+        .blog-details {
+            margin-bottom: 40px;
+        }
+    }
+}

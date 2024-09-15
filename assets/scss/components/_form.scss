@@ -76,3 +76,69 @@ select {
         }
     }
 }
+
+.wpcf7 {
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="password"],
+    select,
+    textarea {
+        width: 100%;
+    }
+
+    textarea {
+        height: 140px;
+    }
+
+    .wpcf7-list-item {
+        margin-left: 0;
+    }
+
+    #homeaddress {
+        max-height: 64px;
+        overflow: hidden;
+        resize: none;
+    }
+
+    .drag-drop-message {
+        p {
+            font-size: 14px;
+        }
+    }
+
+    .wpcf7-submit {
+        @extend %btn;
+        color: $white;
+        background-color: $yellow2;
+        border: none;
+        transition: .2s ease-in-out;
+
+        &:disabled {
+            opacity: .3;
+
+            @include on-event() {
+                color: $white;
+            }
+        }
+
+        @include on-event() {
+            color: $blue;
+            border-radius: 1px;
+        }
+    }
+
+    .wpcf7-not-valid-tip {
+        font-size: 14px;
+    }
+
+    form.wpcf7-form {
+        .wpcf7-response-output {
+            padding: 10px;
+            margin-left: 0;
+            margin-right: 0;
+            font-size: 16px;
+            text-align: center;
+        }
+    }
+}

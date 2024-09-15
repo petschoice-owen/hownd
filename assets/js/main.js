@@ -247,6 +247,12 @@ jQuery(function($) {
         });
     };
 
+    const wpStoreLocator = () => {
+        if($('.wp-store-locator').length > 0) {
+            $('#wpsl-search-input').attr('placeholder','Type a postcode or address...');
+        }
+    };
+
     header();
     logoSlider();
     bos4wInputRadio();
@@ -255,4 +261,5 @@ jQuery(function($) {
     addToCart();
     filterFlyout();
     miniCart();
+    wpStoreLocator();
 });

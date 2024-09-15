@@ -1,0 +1,37 @@
+
+.contact-page.wp-block-group {
+    width: 100%;
+    max-width: 800px;
+    padding: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: $lgray9;
+
+    p.has-text-align-center {
+        max-width: 650px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .contact-form {
+        .col-12 {
+            margin-bottom: 20px;
+        }
+
+        & > .row > .col-12:last-child {
+            margin-bottom: 0;
+        }
+
+        div[data-id="product-complaints-info"] {
+            margin-top: -20px;
+        }
+
+        #product_label_cf {
+            font-size: 14px;
+        }
+    }
+
+    @media (max-width: 767px) {
+        padding: 25px;
+    }
+}

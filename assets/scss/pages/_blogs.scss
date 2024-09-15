@@ -64,11 +64,17 @@
 
     .post-link {
         display: flex;
-        object-fit: cover;
-        object-position: center;
-        width: auto;
-        height: 380px;
-        overflow: hidden;
+        // object-fit: cover;
+        // object-position: center;
+        // width: auto;
+        // height: 380px;
+        // overflow: hidden;
+        width: 100%;
+        height: auto;
+
+        img {
+            width: 100%;
+        }
     }
 
     .blog-details {

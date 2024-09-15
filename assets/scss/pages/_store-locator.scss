@@ -1,0 +1,246 @@
+
+.wp-store-locator #wpsl-wrap {
+    .wpsl-search {
+        padding: 15px;
+        background-color: $lgray9;
+    }
+
+    form {
+        display: flex;
+        justify-content: space-between;
+        font-size: 16px;
+
+        & > * {
+            margin-bottom: 0 !important;
+        }
+    }
+
+    .wpsl-input {
+        display: flex;
+
+        div {
+            margin: 0;
+
+            & > label {
+                display: none;
+            }
+        }
+
+        #wpsl-search-input {
+            width: 300px;
+            min-height: 0;
+        }
+    }
+
+    .wpsl-dropdown {
+        width: auto;
+        min-width: 120px;
+    }
+
+    .wpsl-select-wrap {
+        display: flex;
+        align-items: center;
+
+        label {
+            width: auto;
+        }
+    }
+
+    #wpsl-radius,
+    #wpsl-results,
+    #wpsl-category {
+        display: flex;
+        align-items: center;
+
+        label {
+            width: auto;
+        }
+    }
+
+    #wpsl-checkbox-filter {
+        display: flex;
+        width: fit-content;
+        align-items: center;
+        margin: 0;
+
+        li {
+            width: auto;
+        }
+
+        label {
+            display: flex;
+        }
+    }
+
+    .wpsl-search-btn-wrap {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+
+        #wpsl-search-btn {
+            @extend %btn;
+            margin: 0;
+            min-width: auto;
+            color: $white;
+            background-color: $yellow2;
+            background-image: none;
+            border: none;
+            transition: .2s ease-in-out;
+
+            @include on-event() {
+                color: $blue;
+                border-radius: 1px;
+            }
+        }    
+    }
+
+    #wpsl-stores li {
+        @include on-event() {
+            background-color: $lgray9;
+        }
+    }
+
+    .wpsl-store-location {
+        p {
+            margin-bottom: 5px;
+            font-size: 16px;
+
+            strong {
+                color: $blue;
+            }
+        }
+    }
+
+    .wpsl-direction-wrap {
+        display: flex;
+        font-size: 16px;
+
+        .wpsl-directions {
+            margin-left: 10px;
+        }
+    }
+
+    #wpsl-direction-details {
+        font-size: 16px;
+
+        .wpsl-direction-before {
+            margin: 10px 0;
+
+            .wpsl-back + div {
+                margin-top: 5px;
+            }
+        }
+
+        .wpsl-direction-index {
+            position: relative;
+            width: auto;
+            margin-right: 10px;
+
+            &::after {
+                content: ".";
+                position: relative;
+            }
+        }
+
+        .wpsl-direction-distance {
+            float: none;
+            padding-left: 15px;
+            margin-right: 5px;
+            margin-left: auto;
+        }
+
+        .wpsl-direction-after {
+            padding-top: 5px;
+            font-size: 12px;
+        }
+    }
+
+    @media (max-width: 991px) {
+        form {
+            font-size: 14px;
+        }
+
+        .wpsl-input {
+            #wpsl-search-input {
+                width: 215px;
+                padding: 6.5px 10px;
+            }
+        }
+
+        .wpsl-dropdown {
+            min-width: 100px;
+        }
+
+        .wpsl-search-btn-wrap { 
+            #wpsl-search-btn {
+                padding: 6px 15px;
+                min-height: 0;
+                height: 36px;
+                font-size: 16px;
+            }    
+        }
+    }
+
+    @media (max-width: 767px) {
+        form {
+            flex-wrap: wrap;
+        }
+
+        #wpsl-stores, #wpsl-gmap {
+            height: 400px !important;
+        }
+
+        .wpsl-input {
+            margin-right: 0;
+
+            #wpsl-search-input {
+                width: 100%;
+                margin: 0 0 15px 0;
+            }
+        }
+
+        .wpsl-contact-details {
+            span {
+                word-break: break-word;
+            }
+        }
+
+        .stockist-result-list {
+            .stockist-result-distance {
+                display: none;
+            }
+
+            .stockist-result {
+                & > * {
+                    padding-left: 0;
+                }
+            }
+        }
+    }
+
+    @media (max-width: 575px) {
+        .wpsl-dropdown {
+            min-width: 93px;
+            height: 36px;
+            min-height: 36px;
+            padding: 4px 10px;
+        }
+
+        .wpsl-select-wrap {
+            margin-bottom: 15px !important;
+        }
+
+        #wpsl-radius,
+        #wpsl-results,
+        #wpsl-category {
+            label {
+                min-width: 65px;
+            }
+
+            select {
+
+            }
+        }
+    }
+}
