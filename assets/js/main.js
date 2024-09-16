@@ -253,6 +253,20 @@ jQuery(function($) {
         }
     };
 
+    const howndClubPopup = () => {
+        $('.js-hownd-club-trigger').on('click', function(e) {
+            e.preventDefault();
+
+            $('#howndClubPopup').addClass('open');
+        });
+
+        $('body').on('click', '.js-close-popup', function(e) {
+            e.preventDefault();
+
+            $(this).closest('.popup').removeClass('open');
+        });
+    };
+
     header();
     logoSlider();
     bos4wInputRadio();
@@ -262,4 +276,5 @@ jQuery(function($) {
     filterFlyout();
     miniCart();
     wpStoreLocator();
+    howndClubPopup();
 });

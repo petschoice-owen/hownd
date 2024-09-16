@@ -52,24 +52,24 @@ add_filter( 'query_vars', 'hownd_add_query_vars_filter' );
 // Customize 'Add to Cart' button for variable products on the shop page
 function hownd_add_to_cart_button_products() {
     global $product;
+    if ( !is_product_button_hidden($product) ) {
+        if( $product->is_type( 'variable' ) ) {
+            $product_id = $product->get_id();
+            $variations = $product->get_available_variations();
+            if ( ! empty( $variations ) ) {
+                $first_variation_id = $variations[0]['variation_id'];
 
-    if ( $product->is_type( 'variable' ) ) {
-        $product_id = $product->get_id();
-        $variations = $product->get_available_variations();
-
-        if ( ! empty( $variations ) ) {
-            $first_variation_id = $variations[0]['variation_id'];
-
-            // Ensure the first variation is in stock
-            if ( $product->get_child( $first_variation_id )->is_in_stock() ) {
-                echo '<a href="#" class="button add_to_cart_button" data-product_id="' . esc_attr( $product_id ) . '" data-variation_id="' . esc_attr( $first_variation_id ) . '">Add to Cart</a>';
-            } else {
-                echo '<a href="' . esc_url( $product->get_permalink() ) . '" class="button">View Product</a>';
+                // Ensure the first variation is in stock
+                if ( $product->get_child( $first_variation_id )->is_in_stock() ) {
+                    echo '<a href="#" class="button add_to_cart_button" data-product_id="' . esc_attr( $product_id ) . '" data-variation_id="' . esc_attr( $first_variation_id ) . '">Add to Cart</a>';
+                } else {
+                    echo '<a href="' . esc_url( $product->get_permalink() ) . '" class="button">View Product</a>';
+                }
             }
-        }
-    } else {
-        if( $product->is_in_stock() ) {
-            echo '<a href="#" class="button add_to_cart_button" data-product_id="' . esc_attr( $product->get_id() ) . '">Add to Cart</a>';
+        } else {
+            if( $product->is_in_stock() ) {
+                echo '<a href="#" class="button add_to_cart_button" data-product_id="' . esc_attr( $product->get_id() ) . '">Add to Cart</a>';
+            }
         }
     }
 }

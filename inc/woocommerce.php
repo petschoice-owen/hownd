@@ -116,6 +116,12 @@ add_filter( 'woocommerce_product_tabs', 'hownd_product_tabs', 9999 );
 remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_excerpt', 20 );
 add_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_excerpt', 40 );
 remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_meta', 40 );
+add_action( 'woocommerce_single_product_summary', function() {
+    global $product;
+    if (is_product_button_hidden( $product ) ) {
+        echo '<div class="hownd-trade-product-message">To view pricing or buy, please create or sign in to your account as a groomer or retailer.</div>';
+    }
+}, 45 );
 
 //remove related products
 remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_related_products', 20 );
@@ -201,14 +207,16 @@ function hownd_recently_viewed_v2_shortcode() {
     echo '<div class="hownd-recently-viewed--v2">';
         foreach($viewed_products as $product_id) {
             $_product = wc_get_product( $product_id );
-            echo '<div class="item">';
-                echo '<div class="item__image">'. $_product->get_image() .'</div>';
-                echo '<div class="item__details">';
-                    echo '<h3 class="item__title">'. $_product->get_name() .'</h3>';
-                    echo '<div class="item__price">'. $_product->get_price_html() . '</div>';
-                    echo '<a href="'. $_product->get_permalink() .'" class="item__link">View the full product</a>';
+            if($_product) {
+                echo '<div class="item">';
+                    echo '<div class="item__image">'. $_product->get_image() .'</div>';
+                    echo '<div class="item__details">';
+                        echo '<h3 class="item__title">'. $_product->get_name() .'</h3>';
+                        echo '<div class="item__price">'. $_product->get_price_html() . '</div>';
+                        echo '<a href="'. $_product->get_permalink() .'" class="item__link">View the full product</a>';
+                    echo '</div>';
                 echo '</div>';
-            echo '</div>';
+            }
         }
     echo '</div>';
 }

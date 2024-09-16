@@ -153,7 +153,83 @@
             </div>
         </div>
         </footer>
-    </div> 
+    </div>
+    <?php if ( !is_user_logged_in() ) : ?>
+        <a href="#" class="trigger-hownd-club js-hownd-club-trigger"><i class="fa fa-angle-up"></i> <?php echo __( 'The Hownd Club', 'hownd' ); ?></a>
+        <div id="howndClubPopup" class="popup popup--howndclub">
+            <div class="popup__wrapper">
+                <div class="d-md-none popup__close-mobile-wrapper">
+                    <a href="#" class="popup__close-mobile js-close-popup"><i class="fa fa-angle-left"></i> Return to store</a>
+                </div>
+                <div class="popup__header">
+                    <?php echo get_field( 'hownd_hcp_heading', 'option' ); ?>
+                    <a href="#" class="popup__close js-close-popup"><i class="fa fa-remove"></i></a>
+                </div>
+                <div class="popup__content">
+                    <?php if( have_rows( 'hownd_hcp_left_column', 'option' ) ) : ?>
+                        <?php while( have_rows( 'hownd_hcp_left_column', 'option' ) ) : the_row(); ?>
+                            <div class="popup--howndclub__column">
+                                <div class="intro">
+                                    <?php echo get_sub_field( 'title' ); ?>
+                                </div>
+                                <?php if( have_rows( 'list' ) ) : ?>
+                                    <div class="list">
+                                        <?php while( have_rows( 'list' ) ) : the_row(); ?>
+                                            <div class="list-item">
+                                                <?php
+                                                if( $image = get_sub_field( 'image' ) ) {
+                                                    echo '<div class="image">' . wp_get_attachment_image( $image, 'medium' ) . '</div>';
+                                                }
+                                                ?>
+                                                <div class="info">
+                                                    <div class="title"><?php echo get_sub_field( 'title' ); ?></div>
+                                                    <div class="value"><?php echo get_sub_field( 'subtitle' ); ?></div>
+                                                </div>
+                                            </div>
+                                        <?php endwhile; ?>
+                                    </div>
+                                <?php endif; ?>
+                            </div>
+                        <?php endwhile; ?>
+                    <?php endif; ?>
+                    <?php if( have_rows( 'hownd_hcp_right_column', 'option' ) ) : ?>
+                        <?php while( have_rows( 'hownd_hcp_right_column', 'option' ) ) : the_row(); ?>
+                            <div class="popup--howndclub__column">
+                                <div class="intro">
+                                    <?php echo get_sub_field( 'title' ); ?>
+                                </div>
+                                <?php if( have_rows( 'list' ) ) : ?>
+                                    <div class="list">
+                                        <?php while( have_rows( 'list' ) ) : the_row(); ?>
+                                            <div class="list-item">
+                                                <?php
+                                                if( $image = get_sub_field( 'image' ) ) {
+                                                    echo '<div class="image">' . wp_get_attachment_image( $image, 'medium' ) . '</div>';
+                                                }
+                                                ?>
+                                                <div class="info">
+                                                    <div class="title"><?php echo get_sub_field( 'title' ); ?></div>
+                                                    <div class="value"><?php echo get_sub_field( 'subtitle' ); ?></div>
+                                                </div>
+                                            </div>
+                                        <?php endwhile; ?>
+                                    </div>
+                                <?php endif; ?>
+                            </div>
+                        <?php endwhile; ?>
+                    <?php endif; ?>
+                </div>
+                <div class="popup__footer">
+                    <p>Log in or sign up to HOWND to earn rewards today</p>
+                    <div class="actions">
+                        <a href="<?php echo wc_get_page_permalink( 'myaccount' ) . '/login'; ?>" class="btn-primary2">Log in</a>
+                        <span class="spacer">/</span>
+                        <a href="<?php echo wc_get_page_permalink( 'myaccount' ) . '/register'; ?>" class="btn-primary2">Sign up</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <?php endif; ?>
     <?php wp_footer(); ?>
 
     </body>
