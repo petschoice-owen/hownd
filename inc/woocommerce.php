@@ -322,23 +322,24 @@ add_action( 'woocommerce_before_checkout_form', 'hownd_hide_checkout_button_base
 
 // Ensure checkout button visibility is updated on AJAX cart update
 function hownd_hide_checkout_button_on_ajax() {
+    if( is_cart() || is_checkout() ) :
     $minimum_order_amount = get_field( 'hownd_minimum_order_price', 'option' );
     $maximum_order_amount = get_field( 'hownd_maximum_order_price', 'option' );
-    $has_restricted_message = get_field( 'hownd_cart_restricted_zone_message', 'option' ) ? true : false;
+    $has_restricted_message = get_field( 'hownd_cart_restricted_zone_message', 'option' ) ? 'true' : 'false';
     ?>
     <script type="text/javascript">
     jQuery( function( $ ) {
         function updateCheckoutButton() {
-            var minimum_order_amount = <?php echo $minimum_order_amount; ?>;
-            var maximum_order_amount = <?php echo $maximum_order_amount; ?>;
+            var minimum_order_amount = <?php echo $minimum_order_amount ? $minimum_order_amount : '""'; ?>;
+            var maximum_order_amount = <?php echo $maximum_order_amount ? $maximum_order_amount : '""'; ?>;
             var cart_total = parseFloat( $( '.cart-subtotal .amount' ).text().replace( /[^\d.]/g, '' ) );
             var restricted_zone_selected = false;
+            var has_restricted_message = <?php echo $has_restricted_message; ?>;
             var shippingMethod = $('#shipping_method').text().trim();
             if ( ( !shippingMethod || shippingMethod.includes("Restricted Zone") ) && has_restricted_message ) {
                 restricted_zone_selected = true;
             }
-
-            if ( cart_total < minimum_order_amount || cart_total > maximum_order_amount || restricted_zone_selected ) {
+            if ( (minimum_order_amount && cart_total < minimum_order_amount) || (maximum_order_amount && cart_total > maximum_order_amount) || restricted_zone_selected ) {
                 $( '.wc-proceed-to-checkout' ).hide();
                 if(restricted_zone_selected) {
                     $('.restricted-zone-message').show();
@@ -361,6 +362,7 @@ function hownd_hide_checkout_button_on_ajax() {
     });
     </script>
     <?php
+    endif;
 }
 add_action( 'wp_footer', 'hownd_hide_checkout_button_on_ajax' );
 
