@@ -369,6 +369,7 @@ add_action( 'wp_footer', 'hownd_hide_checkout_button_on_ajax' );
 //ACCOUNT
 function hownd_my_account_items( $items ) {
     unset($items['downloads']);
+    unset($items['request-quote']);
     return $items;
 }
 add_filter( 'woocommerce_account_menu_items', 'hownd_my_account_items' );
@@ -469,3 +470,31 @@ function hownd_add_dog_owner_role() {
     }
 }
 add_action('init', 'hownd_add_dog_owner_role');
+
+//shipping methods
+function hownd_custom_shipping_methods_by_role($rates, $package) {
+    if ( wc_current_user_has_role( 'groomer' ) || wc_current_user_has_role( 'retailer' ) ) {
+        if ( isset( $rates['flat_rate:1'] ) ) unset( $rates['flat_rate:1'] );
+        if ( isset( $rates['free_shipping:2'] ) ) unset( $rates['free_shipping:2'] );
+        if ( isset( $rates['flat_rate:3'] ) ) unset( $rates['flat_rate:3'] );
+        if ( isset( $rates['flat_rate:4'] ) ) unset( $rates['flat_rate:4'] );
+        if ( isset( $rates['free_shipping:5'] ) ) unset( $rates['free_shipping:5'] );
+        if ( isset( $rates['free_shipping:6'] ) ) unset( $rates['free_shipping:6'] );
+        if ( isset( $rates['flat_rate:7'] ) ) unset( $rates['flat_rate:7'] );
+        if ( isset( $rates['free_shipping:8'] ) ) unset( $rates['free_shipping:8'] );
+        if ( isset( $rates['flat_rate:9'] ) ) unset( $rates['flat_rate:9'] );
+        
+    } else {
+        if ( isset( $rates['free_shipping:10'] ) ) unset( $rates['free_shipping:10'] );
+        if ( isset( $rates['flat_rate:11'] ) ) unset( $rates['flat_rate:11'] );
+        if ( isset( $rates['flat_rate:12'] ) ) unset( $rates['flat_rate:12'] );
+        if ( isset( $rates['flat_rate:13'] ) ) unset( $rates['flat_rate:13'] );
+        if ( isset( $rates['free_shipping:14'] ) ) unset( $rates['free_shipping:14'] );
+        if ( isset( $rates['flat_rate:15'] ) ) unset( $rates['flat_rate:15'] );
+        if ( isset( $rates['free_shipping:16'] ) ) unset( $rates['free_shipping:16'] );
+        if ( isset( $rates['flat_rate:17'] ) ) unset( $rates['flat_rate:17'] );
+        if ( isset( $rates['free_shipping:18'] ) ) unset( $rates['free_shipping:18'] );
+    }
+    return $rates;  
+}
+add_filter('woocommerce_package_rates', 'hownd_custom_shipping_methods_by_role', 9999, 2);
