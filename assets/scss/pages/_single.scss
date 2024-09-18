@@ -103,6 +103,20 @@
         }
     }
 
+    figure.is-type-video {
+        left: initial;
+        right: initial;
+        width: 100%; 
+        margin-left: 0;
+        margin-right: 0;
+
+        iframe {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    }
+
     @media (max-width: 767px) {
         .content {
             max-width: 90%;
