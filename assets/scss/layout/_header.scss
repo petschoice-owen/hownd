@@ -200,9 +200,8 @@
             position: absolute;
             top: 23px;
             right: 0;
-            z-index: 11;
-            bottom: 0;
             left: 0;
+            z-index: 11;
             display: block;
 
             form {
@@ -222,10 +221,10 @@
 
                 .search-submit {
                     position: absolute;
-                    top: 10px;
-                    right: 10px;
+                    top: 0;
+                    right: 0;
                     padding: 12px 25px;
-                    min-height: 44px;
+                    height: 100%;
                     font-size: 12px;
                     line-height: 1.5;
                     color: $blue;
