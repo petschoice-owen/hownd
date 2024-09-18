@@ -267,6 +267,16 @@ jQuery(function($) {
         });
     };
 
+    const scrollToTop = () => {
+        $('.js-scrolltop').on('click', function(e) {
+            e.preventDefault();
+
+            $('html, body').animate({
+                scrollTop: 0
+            }, 10);
+        });
+    };
+
     header();
     logoSlider();
     bos4wInputRadio();
@@ -277,4 +287,5 @@ jQuery(function($) {
     miniCart();
     wpStoreLocator();
     howndClubPopup();
+    scrollToTop();
 });

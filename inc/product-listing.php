@@ -104,3 +104,18 @@ function hownd_woocommerce_pagination_args( $args ) {
     return $args;
 }
 add_filter( 'woocommerce_pagination_args', 'hownd_woocommerce_pagination_args' );
+
+function hownd_exclude_product_from_category( $query ) {
+    if ( ! is_admin() && $query->is_main_query() ) {
+        if ( is_product_category() ) {
+            $category_id = get_queried_object()->term_id;
+            $template = get_field( 'hownd_pc_template', 'product_cat_'.$category_id );
+            $featured_product = get_field( 'hownd_pc_featured_product', 'product_cat_'.$category_id );
+            
+            if( 'template1' === $template && $featured_product ) {
+                $query->set('post__not_in', array($featured_product));
+            }
+        }
+    }
+}
+add_action( 'pre_get_posts', 'hownd_exclude_product_from_category' );
