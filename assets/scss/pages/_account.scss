@@ -147,6 +147,14 @@
                     border-top: 1px solid $blue;
                 }
             }
+
+            .wlr-my-rewards-sections {
+                .wlr-rewards-content.donate-block {
+                    .wlr-reward-type-name {
+                        display: none !important;
+                    }
+                }
+            }
         }
     }
 

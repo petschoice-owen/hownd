@@ -264,6 +264,9 @@ jQuery(function($) {
             e.preventDefault();
 
             $(this).closest('.popup').removeClass('open');
+            if( 'donatePopup' === $(this).closest('.popup').attr('id') ) {
+                $(this).closest('.popup').find('.text-danger').remove();
+            }
         });
     };
 
@@ -277,6 +280,55 @@ jQuery(function($) {
         });
     };
 
+    const allDogsMatter = () => {
+          // Define the function to call on change
+        function onChangeLauncher() {
+            $('.wll-fixed_cart-container').each(function() {
+                var cartName = $(this).find('.wll-fixed_cart-name').text();
+                if (cartName === 'Donate to All Dogs Matter') {
+                    $(this).addClass('donate-block');
+                    var button = $(this).find('button#wll-fixed_cart-redeem-button');
+                    button.on('click', function(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        $('#donatePopup').addClass('open');
+                    });
+                }
+            });
+        }
+
+        // Create a new instance of MutationObserver
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                onChangeLauncher(); // Call the function whenever a change is detected
+            });
+        });
+
+        // Select the target node
+        const targetNode = document.getElementById('wll-site-launcher');
+        const config = { childList: true, subtree: true, characterData: true };
+        observer.observe(targetNode, config);
+    };
+
+
+    const allDogsMatterAccount = () => {
+        if($('#wlr-my-rewards-sections').length > 0) {
+            $('.wlr-reward-card').each(function() {
+                var cartName = $(this).find('.wlr-pre-text').text().trim();
+                if (cartName.toLowerCase().indexOf("donate") >= 0) {
+                    $(this).addClass('donate-block');
+                    var button = $(this).find('.wlr-button-reward');
+                    button.attr('onclick', '');
+                    button.off('click').on('click', function(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        $('#donatePopup').addClass('open');
+                    });
+                }
+            });
+        }
+    };
+
     header();
     logoSlider();
     bos4wInputRadio();
@@ -288,4 +340,6 @@ jQuery(function($) {
     wpStoreLocator();
     howndClubPopup();
     scrollToTop();
+    allDogsMatter();
+    allDogsMatterAccount();
 });

@@ -230,6 +230,19 @@
             </div>
         </div>
     <?php endif; ?>
+    <?php if ( is_user_logged_in() ) : ?>
+        <div id="donatePopup" class="popup popup--donate">
+            <div class="popup__wrapper">
+                <div class="popup__header">
+                    <?php echo __( 'Donate to All Dogs Matter', 'hownd' ); ?>
+                    <a href="#" class="d-block popup__close js-close-popup"><i class="fa fa-remove"></i></a>
+                </div>
+                <div class="popup__content p-4 text-center">
+                    <?php echo do_shortcode('[hownd_donate_form]'); ?>
+                </div>
+            </div>
+        </div>
+    <?php endif; ?>
     <?php wp_footer(); ?>
 
     </body>

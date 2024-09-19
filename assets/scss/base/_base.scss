@@ -40,4 +40,15 @@ body:not(.logged-in) #wll-site-launcher {
     .text-light {
         color: inherit !important;
     }
+
+    .wll-rewards-list-container .wll-fixed_cart-container.donate-block {
+        .wll-fixed_cart-action-text {
+            font-size: 0;
+
+            &:before {
+                content: '500 points';
+                font-size: 16px;
+            }
+        }
+    }
 }
