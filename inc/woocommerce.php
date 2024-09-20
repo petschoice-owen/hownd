@@ -368,11 +368,25 @@ add_action( 'wp_footer', 'hownd_hide_checkout_button_on_ajax' );
 
 //ACCOUNT
 function hownd_my_account_items( $items ) {
+    unset($items['dashboard']);
     unset($items['downloads']);
     unset($items['request-quote']);
     return $items;
 }
 add_filter( 'woocommerce_account_menu_items', 'hownd_my_account_items' );
+
+//Redirect dashboard to orders
+add_action( 'parse_request', function ( $wp ) {
+    // Prevent the redirection, in the case,
+    // the user is not logged in (no login, no orders)
+    if (!is_user_logged_in()) return false;
+
+    if ( $wp->request === 'my-account' ) {
+        wp_safe_redirect( wc_get_account_endpoint_url( 'orders' ) );
+        exit;
+    }
+}, 10, 1 );
+
 
 //Registration Shortcode
 function hownd_separate_registration_form() {

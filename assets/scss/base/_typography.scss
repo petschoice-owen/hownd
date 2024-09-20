@@ -68,6 +68,14 @@ a {
     color: $primary;
 }
 
+.hownd-trade-product-message {
+    padding: 10px;
+    font-family: 'Gotham Medium';
+    font-size: 14px;
+    color: $white;
+    background-color: $gray9;
+}
+
 @include respond-to(lg-down) {
     h1,h2 {
         font-size: 35px;

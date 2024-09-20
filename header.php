@@ -165,3 +165,12 @@
         <main>
             <?php echo is_woocommerce() ? '<div class="container">' : ''; ?>
                 <?php echo is_account_page() ? '<h2 class="text-center">My Account</h2>' : ''; ?>
+                <?php if( is_user_logged_in() && is_account_page() ) : 
+                    global $wp_roles;
+                    $current_user = wp_get_current_user();
+                    $role = $current_user->roles[0];
+                    $role_display_name = $wp_roles->roles[$role]['name'];
+                    
+                ?>
+                    <p class="text-center px-3 mb-4">Hi <?php echo $current_user->display_name; ?> you are logged in to your <?php echo esc_html($role_display_name); ?> account.</p>
+                <?php endif; ?>

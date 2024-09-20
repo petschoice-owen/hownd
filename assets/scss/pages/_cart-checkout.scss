@@ -357,6 +357,56 @@
         }
     }
 
+    &.woocommerce-order-received {
+        .woocommerce-notice--success.woocommerce-thankyou-order-received {
+            padding: 10px;
+            margin-bottom: 30px;
+            color: $white;
+            text-align: center;
+            background-color: $green;
+        }
+
+        h2 {
+            font-size: 32px;
+        }
+
+        ul.woocommerce-thankyou-order-details {
+            padding: 0;
+            margin-bottom: 30px;
+
+            li {
+                margin-bottom: 10px;
+            }
+        }
+
+        .woocommerce-customer-details {
+            .woocommerce-column {
+                margin-bottom: 20px;
+            }
+            .woocommerce-customer-details--phone {
+                margin-bottom: 0;
+            }
+        }
+
+        a.woocommerce-button.button {
+            @extend %btn;
+            min-width: 0;
+            min-height: 0;
+            font-size: 14px;
+            color: $blue;
+            background-color: $primary;
+
+            @include on-event() {
+                color: $blue;
+                background-color: $primary;
+            }
+        }
+    }
+
+    &.woocommerce-order-pay main {
+        padding-top: 50px;
+    }
+
     @include respond-to(md-up) {
         &.woocommerce-cart {
             .shop_table {
