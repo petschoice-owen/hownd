@@ -39,22 +39,23 @@ $current_orderby = isset( $_GET['orderby'] ) ? $_GET['orderby'] : '';
 </div>
 
 <?php
-if (is_product_category()) {
-    // Get the current category
-    $current_category = get_queried_object();
-    
+if (is_shop() || is_product_category()) {
     // Get all products in this category
     $args = array(
         'post_type' => 'product',
         'posts_per_page' => -1,
-        'tax_query' => array(
+    );
+    if(is_product_category()) {
+        // Get the current category
+        $current_category = get_queried_object();
+        $args['tax_query'] = array(
             array(
                 'taxonomy' => 'product_cat',
                 'field'    => 'term_id',
                 'terms'    => $current_category->term_id,
-            ),
-        ),
-    );
+            )
+        );
+    }
     $query = new WP_Query($args);
 
     // Array to hold all tags

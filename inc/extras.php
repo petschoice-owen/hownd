@@ -83,3 +83,40 @@ function hownd_club_info_function() {
     return ob_get_clean();
 }
 add_shortcode( 'hownd_club_info', 'hownd_club_info_function' );
+
+function hownd_product_categories_func() {
+    $exclude_ids = array( 15, 76, 77 );
+    $product_categories = get_terms( array(
+        'taxonomy'   => 'product_cat',
+        'hide_empty' => false,
+        'exclude'    => $exclude_ids
+    ) );
+    if(!$product_categories) return;
+    
+    ob_start();
+    ?>
+    <div class="row hownd-collections-list">
+        <?php foreach ( $product_categories as $category ) : ?>
+            <div class="col-md-6 col-lg-4 hownd-collections-list__col">
+                <div class="hownd-collections-list__item">
+                    <?php
+                        $thumbnail_id = get_woocommerce_term_meta( $category->term_id, 'thumbnail_id', true );
+                        $image = wp_get_attachment_image( $thumbnail_id, 'large' );
+                        if ( !empty($image) ) :
+                    ?>
+                        <a href="<?php echo esc_url( get_term_link( $category ) ); ?>" class="hownd-collections-list__image">
+                            <?php echo $image; ?>
+                        </a>
+                    <?php endif; ?>
+                    <div class="hownd-collections-list__details">
+                        <h3 class="hownd-collections-list__title"><a href="<?php echo esc_url( get_term_link( $category ) ); ?>"><?php echo esc_html( $category->name ); ?></a></h3>
+                        <div class="hownd-collections-list__desc"><?php echo wp_strip_all_tags($category->description); ?></div>
+                    </div>
+                </div>
+            </div>
+        <?php endforeach; ?>
+    </div>
+    <?php
+    return ob_get_clean();
+}
+add_shortcode( 'hownd_product_categories', 'hownd_product_categories_func' );

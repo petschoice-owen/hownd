@@ -1,0 +1,41 @@
+
+.hownd-collections-list {
+    &__col {
+        display: flex;
+        margin-bottom: 24px;
+    }
+
+    &__item {
+        width: 100%;
+        background-color: $lgray9;
+    }
+
+    &__image {
+        position: relative;
+        display: block;
+        padding-bottom: 100%;
+        background-color: $white;
+
+        img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+    }
+
+    &__details {
+        padding: 20px;
+        font-size: 16px;
+    }
+
+    &__title {
+        font-size: 33px;
+        a {
+            color: $gray4;
+            text-decoration: none;
+        }
+    }
+}
