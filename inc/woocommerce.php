@@ -512,3 +512,9 @@ function hownd_custom_shipping_methods_by_role($rates, $package) {
     return $rates;  
 }
 add_filter('woocommerce_package_rates', 'hownd_custom_shipping_methods_by_role', 9999, 2);
+
+
+function hownd_woocommerce_checkout_terms_and_conditions() {
+    remove_action( 'woocommerce_checkout_terms_and_conditions', 'wc_terms_and_conditions_page_content', 30 );
+}
+add_action( 'wp', 'hownd_woocommerce_checkout_terms_and_conditions' );
