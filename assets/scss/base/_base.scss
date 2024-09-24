@@ -51,4 +51,28 @@ body:not(.logged-in) #wll-site-launcher {
             }
         }
     }
+
+    .wll-rewards-title,
+    .wll-earn-points-title {
+        font-family: 'Gotham Medium';
+    }
+
+    .wll-reward-opportunities-my-rewards-tab-container p {
+        font-size: 13px !important;
+    }
+
+    .wll-fixed_cart-container,
+    .wll-fixed_cart-name-action-container,
+    .wll-free_shipping-container {
+        row-gap: 0 !important;
+    }
+
+    .wll-fixed_cart-icon-container,
+    .wll-free_shipping-icon-container {
+        pointer-events: none;
+    }
+
+    .wll-fixed_cart-redeem-button-container {
+        margin-top: 10px;
+    }
 }

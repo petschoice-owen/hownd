@@ -211,8 +211,14 @@
                 font-size: 32px;
             }
 
-            .woocommerce-customer-details--phone {
+            .woocommerce-customer-details--phone,
+            .woocommerce-customer-details--email {
+                padding-left: 0;
                 margin-bottom: 0;
+
+                &:before {
+                    display: none;
+                }
             }
         }
 

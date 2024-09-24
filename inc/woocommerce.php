@@ -518,3 +518,34 @@ function hownd_woocommerce_checkout_terms_and_conditions() {
     remove_action( 'woocommerce_checkout_terms_and_conditions', 'wc_terms_and_conditions_page_content', 30 );
 }
 add_action( 'wp', 'hownd_woocommerce_checkout_terms_and_conditions' );
+
+/**
+ * Hide shipping rates when free shipping is available.
+ */
+function hownd_hide_shipping_when_free_is_available( $rates ) {
+	$free = array();
+	foreach ( $rates as $rate_id => $rate ) {
+		if ( 'free_shipping' === $rate->method_id ) {
+			$free[ $rate_id ] = $rate;
+			break;
+		}
+	}
+	return ! empty( $free ) ? $free : $rates;
+}
+add_filter( 'woocommerce_package_rates', 'hownd_hide_shipping_when_free_is_available', 100 );
+
+
+add_filter('fsl_min_amount', function ($amount) {
+	if (is_user_logged_in()) {
+
+		$user = wp_get_current_user();
+
+		$roles = (array) $user->roles;		
+
+		if ( in_array( 'retailer', $roles ) || in_array( 'groomer', $roles ) ) {
+			$amount = 350;
+		}
+	}
+
+	return $amount;
+});
