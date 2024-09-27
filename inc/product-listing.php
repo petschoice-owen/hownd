@@ -6,8 +6,11 @@ add_action( 'woocommerce_after_shop_loop', 'woocommerce_result_count', 5 );
 //SHOP FILTER
 function hownd_shop_filter() {
     if (is_shop() || is_product_category()) {
+        global $wp_query;
         $current_per_page = get_query_var('products_per_page', 12); // Default to 12 if not set
         $per_page_options = array(12, 24, 36);
+        $total_posts = $wp_query->found_posts;
+        $current_page = max(1, get_query_var('paged', 1));
         echo '<div class="shop-actions">';
             echo '<div class="shop-actions__filter">';
                 echo '<a href="#flyoutRange" class="js-filter-trigger">Filter <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" class="icon" viewBox="0 0 24 24">
@@ -21,8 +24,16 @@ function hownd_shop_filter() {
             echo '</div>';
             echo '<div class="shop-actions__view"><span>Show</span>';
             foreach ($per_page_options as $option) {
+                $total_pages = ceil($total_posts / intval($option));
                 $class = ($current_per_page == $option) ? 'active' : '';
-                echo '<a href="' . esc_url(add_query_arg('products_per_page', $option)) . '" class="' . esc_attr($class) . '">' . esc_html($option) . '</a>';
+                if ($current_page <= $total_pages) {
+                    echo '<a href="' . esc_url(add_query_arg('products_per_page', $option)) . '" class="' . esc_attr($class) . '">' . esc_html($option) . '</a>';
+                }else {
+                    $new_query_args = array(
+                        'products_per_page' => $option,
+                    );
+                    echo '<a href="' . esc_url(add_query_arg($new_query_args, get_pagenum_link($total_pages))) . '" class="' . esc_attr($class) . '">' . esc_html($option) . '</a>';
+                }
             }
             echo '</div>';
         echo '</div>';

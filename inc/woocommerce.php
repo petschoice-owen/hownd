@@ -485,6 +485,27 @@ function hownd_add_dog_owner_role() {
 }
 add_action('init', 'hownd_add_dog_owner_role');
 
+/**
+ * Hide shipping rates when free shipping is available.
+ */
+function hownd_hide_shipping_when_free_is_available( $rates ) {
+	$free = array();
+	if ( is_user_logged_in() && (wc_current_user_has_role( 'groomer' ) || wc_current_user_has_role( 'retailer' )) ) {
+		$free_shipping_ids = ['free_shipping:10', 'free_shipping:14', 'free_shipping:16', 'free_shipping:18'];
+	}else {
+		$free_shipping_ids = ['free_shipping:2', 'free_shipping:5', 'free_shipping:6', 'free_shipping:8'];
+	}
+	
+	foreach ( $rates as $rate_id => $rate ) {
+		if ( in_array($rate_id, $free_shipping_ids ) ) {
+			$free[ $rate_id ] = $rate;
+			break;
+		}
+	}
+	return ! empty( $free ) ? $free : $rates;
+}
+add_filter( 'woocommerce_package_rates', 'hownd_hide_shipping_when_free_is_available', 100 );
+
 //shipping methods
 function hownd_custom_shipping_methods_by_role($rates, $package) {
     if ( wc_current_user_has_role( 'groomer' ) || wc_current_user_has_role( 'retailer' ) ) {
@@ -513,27 +534,10 @@ function hownd_custom_shipping_methods_by_role($rates, $package) {
 }
 add_filter('woocommerce_package_rates', 'hownd_custom_shipping_methods_by_role', 9999, 2);
 
-
 function hownd_woocommerce_checkout_terms_and_conditions() {
     remove_action( 'woocommerce_checkout_terms_and_conditions', 'wc_terms_and_conditions_page_content', 30 );
 }
 add_action( 'wp', 'hownd_woocommerce_checkout_terms_and_conditions' );
-
-/**
- * Hide shipping rates when free shipping is available.
- */
-function hownd_hide_shipping_when_free_is_available( $rates ) {
-	$free = array();
-	foreach ( $rates as $rate_id => $rate ) {
-		if ( 'free_shipping' === $rate->method_id ) {
-			$free[ $rate_id ] = $rate;
-			break;
-		}
-	}
-	return ! empty( $free ) ? $free : $rates;
-}
-add_filter( 'woocommerce_package_rates', 'hownd_hide_shipping_when_free_is_available', 100 );
-
 
 add_filter('fsl_min_amount', function ($amount) {
 	if (is_user_logged_in()) {
@@ -549,3 +553,14 @@ add_filter('fsl_min_amount', function ($amount) {
 
 	return $amount;
 });
+
+
+
+function hownd_hide_price_for_multiple_variations($price, $product) {
+    if (is_product() && $product->is_type('variable') && count($product->get_available_variations()) > 1) {
+        return ''; // Return an empty string to hide the price
+    }
+    return $price; // Return the original price if conditions aren't met
+}
+add_filter('woocommerce_get_price_html', 'hownd_hide_price_for_multiple_variations', 10, 2);
+

@@ -397,6 +397,15 @@
             .woocommerce-customer-details--phone {
                 margin-bottom: 0;
             }
+
+            .woocommerce-customer-details--phone,
+            .woocommerce-customer-details--email {
+                padding-left: 0;
+                
+                &:before {
+                    display: none;
+                }
+            }
         }
 
         a.woocommerce-button.button {

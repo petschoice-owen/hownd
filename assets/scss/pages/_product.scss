@@ -85,6 +85,12 @@
                 padding-bottom: 20px;
                 margin-bottom: 20px;
                 border-bottom: 1px solid $lgray;
+
+                ins.highlight {
+                    font-size: 16px;
+                    font-weight: 400;
+                    text-decoration: none;
+                }
             }
 
             .bos4w-display-wrap {
@@ -265,7 +271,12 @@
         }
 
         &.product-type-variable .summary > .price {
-            display: none;
+            // display: none;
+            margin-bottom: 0;
+
+            ins.highlight {
+                display: none;
+            }
         }
     }
 
