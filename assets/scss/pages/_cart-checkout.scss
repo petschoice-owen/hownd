@@ -115,7 +115,8 @@
             }
 
             .checkout-button,
-            .shipping-calculator-button {
+            .shipping-calculator-button,
+            button[type="submit"] {
                 @extend %btn;
                 width: 100%;
                 font-size: 14px;

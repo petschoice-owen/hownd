@@ -143,6 +143,10 @@
                     }
                 }
 
+                .current-menu-item > .nav-link {
+                    opacity: .6;
+                }
+
                 & > .dropdown {
                     position: static;
 
