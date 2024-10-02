@@ -160,7 +160,7 @@
                         "class": "",
                         "id": ""
                     },
-                    "return_format": "array",
+                    "return_format": "url",
                     "parent_repeater": "field_66c355f188882"
                 },
                 {
@@ -1013,5 +1013,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1726483615
+    "modified": 1727874515
 }

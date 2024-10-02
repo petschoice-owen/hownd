@@ -23,7 +23,7 @@ if ( !is_tax() ) return;
 
 $category_id = get_queried_object()->term_id;
 $category = get_term_by('id', $category_id, 'product_cat');
-$thumbnail_id = get_woocommerce_term_meta( $category_id, 'thumbnail_id', true );
+$thumbnail_id = get_term_meta( $category_id, 'thumbnail_id', true );
 $image = wp_get_attachment_image( $thumbnail_id, 'large' );
 $template = get_field( 'hownd_pc_template', 'product_cat_'.$category_id );
 $featured_product = get_field( 'hownd_pc_featured_product', 'product_cat_'.$category_id );

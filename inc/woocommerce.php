@@ -269,13 +269,13 @@ function hownd_min_max_order_notice() {
     $maximum_order_amount = get_field( 'hownd_maximum_order_price', 'option' );
     $cart_total = WC()->cart->get_cart_contents_total();
     $cart_total = floatval($cart_total);
-    if($min_price || $max_price) {
-        if ( $cart_total < $minimum_order_amount ) {
+    if($minimum_order_amount || $maximum_order_amount) {
+        if ( $minimum_order_amount && $cart_total < $minimum_order_amount ) {
             wc_print_notice(
                 sprintf( 'Your cart total is below the minimum amount of %s. Please add more products to reach the minimum amount.', wc_price($minimum_order_amount) ),
                 'error'
             );
-        } elseif ( $cart_total > $maximum_order_amount ) {
+        } elseif ( $maximum_order_amount && $cart_total > $maximum_order_amount ) {
             wc_print_notice(
                 sprintf( 'Your cart total exceeds the maximum amount of %s. Please remove some products to reduce the total amount.', wc_price($maximum_order_amount) ),
                 'error'
