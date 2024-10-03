@@ -336,10 +336,11 @@ function hownd_hide_checkout_button_on_ajax() {
             var restricted_zone_selected = false;
             var has_restricted_message = <?php echo $has_restricted_message; ?>;
             var shippingMethod = $('#shipping_method').text().trim();
+            var isShippingInfoEmpty = $('#calc_shipping_postcode').val() === '';
             if ( ( !shippingMethod || shippingMethod.includes("Restricted Zone") ) && has_restricted_message ) {
                 restricted_zone_selected = true;
             }
-            if ( (minimum_order_amount && cart_total < minimum_order_amount) || (maximum_order_amount && cart_total > maximum_order_amount) || restricted_zone_selected ) {
+            if ( (minimum_order_amount && cart_total < minimum_order_amount) || (maximum_order_amount && cart_total > maximum_order_amount) || restricted_zone_selected || isShippingInfoEmpty ) {
                 $( '.wc-proceed-to-checkout' ).hide();
                 if(restricted_zone_selected) {
                     $('.restricted-zone-message').show();
