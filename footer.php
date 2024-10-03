@@ -92,6 +92,9 @@
                                         <div class="footer__newsletter-socials">
                                             <?php echo get_template_part( 'partials/social' ); ?>
                                         </div>
+                                        <div class="footer__newsletter-form">
+											<div class="klaviyo-form-UScpaq"></div>
+										</div>
                                     </div>
                                 <?php endwhile; ?>
                             <?php endif; ?>

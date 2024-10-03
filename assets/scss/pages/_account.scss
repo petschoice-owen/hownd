@@ -207,6 +207,27 @@
                 }
             }
 
+            .js-account-follow-newsletter {
+                .wlr-description {
+                    display: inline-block;
+                    padding: 5px 10px;
+                    align-self: center;
+                    width: auto;
+                    font-size: 12px;
+                    color: $white !important;
+                    text-align: center;
+                    text-indent: 0 !important;
+                    background-color: $blue;
+                    border-radius: 6px;
+                    -webkit-font-smoothing: antialiased;
+                    cursor: pointer;
+                }
+                .wlr-followup-section {
+                    opacity: 0 !important;
+                    visibility: hidden !important;
+                }
+            }
+
             h2 {
                 font-size: 32px;
             }

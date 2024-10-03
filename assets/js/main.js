@@ -295,7 +295,20 @@ jQuery(function($) {
                     });
                 }
             });
+
+            $('.wll-preview-followup_share-container').each(function() {
+                if($(this).find('.wll-preview-followup_share-name > .wll-flex:eq(0) > p').text() === 'Sign up to our mailing list') {
+                    $(this).addClass('js-follow-newsletter');
+                }
+            });
         }
+
+        $(document).on('click', '.js-follow-newsletter .wll-preview-followup_share-description, .js-account-follow-newsletter .wlr-description', function(e) {
+            e.preventDefault();
+            $('html, body').animate({
+                scrollTop: $('.footer__newsletter-text').offset().top
+            }, 10);
+        });
 
         // Create a new instance of MutationObserver
         const observer = new MutationObserver((mutations) => {
@@ -329,6 +342,17 @@ jQuery(function($) {
         }
     };
 
+    const signUpMailingList = () => {
+        if($('.wlr-campaign-container').length > 0) {
+            $('.wlr-campaign-container .wlr-card').each(function() {
+                var cartName = $(this).find('.wlr-pre-text.wlr-description').text();
+                if (cartName === 'Subscribe') {
+                    $(this).addClass('js-account-follow-newsletter');
+                }
+            });
+        }
+    };
+
     header();
     logoSlider();
     bos4wInputRadio();
@@ -342,4 +366,5 @@ jQuery(function($) {
     scrollToTop();
     allDogsMatter();
     allDogsMatterAccount();
+    signUpMailingList();
 });

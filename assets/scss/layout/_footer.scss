@@ -96,6 +96,12 @@
         .btn-gray {
             margin-top: 30px;
         }
+
+        &-form {
+            form button {
+                padding: 0 25px !important;
+            }
+        }
     }
 
     &__main {

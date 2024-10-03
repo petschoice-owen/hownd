@@ -1,6 +1,6 @@
 <?php
 function hownd_enqueue_scripts() {
-    $version = '1.0';
+    $version = '1.023';
     wp_enqueue_style( 'bootstrap', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css' );
     wp_enqueue_style( 'fontawesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css' );
     wp_enqueue_style( 'slick-css', 'https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css', array(), $version);
@@ -12,7 +12,7 @@ function hownd_enqueue_scripts() {
     if ( has_block( 'acf/hownd-faq' ) ) {
         wp_enqueue_script( 'autocomplete', 'https://cdnjs.cloudflare.com/ajax/libs/jquery.devbridge-autocomplete/1.4.11/jquery.autocomplete.min.js', array(), '', true );
     }
-    wp_enqueue_script( 'main-script', get_template_directory_uri() . '/assets/js/main.js', array(), '', true, $version );
+    wp_enqueue_script( 'main-script', get_template_directory_uri() . '/assets/js/main.js', array(), $version, '', true );
 
 }
 add_action( 'wp_enqueue_scripts', 'hownd_enqueue_scripts', 4 );

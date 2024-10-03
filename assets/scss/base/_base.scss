@@ -75,4 +75,26 @@ body:not(.logged-in) #wll-site-launcher {
     .wll-fixed_cart-redeem-button-container {
         margin-top: 10px;
     }
+
+    .wll-preview-followup_share-container.js-follow-newsletter {
+        .wll-preview-followup_share-description {
+            display: inline-block;
+            padding: 5px 10px;
+            align-self: center;
+            width: auto;
+            font-size: 12px;
+            color: $white !important;
+            text-align: center;
+            text-indent: 0 !important;
+            background-color: $blue;
+            border-radius: 6px;
+            -webkit-font-smoothing: antialiased;
+            cursor: pointer;
+        }
+        
+        .wll-preview-followup_share-follow-share-button {
+            opacity: 0 !important;
+            visibility: hidden !important;
+        }
+    }
 }
