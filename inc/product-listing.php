@@ -74,7 +74,7 @@ function hownd_add_to_cart_button_products() {
                 if ( $product->get_child( $first_variation_id )->is_in_stock() ) {
                     echo '<a href="#" class="button add_to_cart_button" data-product_id="' . esc_attr( $product_id ) . '" data-variation_id="' . esc_attr( $first_variation_id ) . '">Add to Cart</a>';
                 } else {
-                    echo '<a href="' . esc_url( $product->get_permalink() ) . '" class="button">View Product</a>';
+                    // echo '<a href="' . esc_url( $product->get_permalink() ) . '" class="button">View Product</a>';
                 }
             }
         } else {
