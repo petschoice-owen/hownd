@@ -565,3 +565,11 @@ function hownd_hide_price_for_multiple_variations($price, $product) {
 }
 add_filter('woocommerce_get_price_html', 'hownd_hide_price_for_multiple_variations', 10, 2);
 
+// add_filter( 'wc_order_is_editable', 'custom_order_status_editable', 9999, 2 );
+ 
+// function custom_order_status_editable( $allow_edit, $order ) {
+//     if ( $order->get_status() === 'processing' ) {
+//         $allow_edit = true;
+//     }
+//     return $allow_edit;
+// }

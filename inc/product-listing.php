@@ -72,14 +72,14 @@ function hownd_add_to_cart_button_products() {
 
                 // Ensure the first variation is in stock
                 if ( $product->get_child( $first_variation_id )->is_in_stock() ) {
-                    echo '<a href="#" class="button add_to_cart_button" data-product_id="' . esc_attr( $product_id ) . '" data-variation_id="' . esc_attr( $first_variation_id ) . '">Add to Cart</a>';
+                    echo '<a href="#" class="button add_to_cart_button js-shop-atc-variable" data-product_id="' . esc_attr( $product_id ) . '" data-variation_id="' . esc_attr( $first_variation_id ) . '">Add to Cart</a>';
                 } else {
                     // echo '<a href="' . esc_url( $product->get_permalink() ) . '" class="button">View Product</a>';
                 }
             }
         } else {
             if( $product->is_in_stock() ) {
-                echo '<a href="#" class="button add_to_cart_button" data-product_id="' . esc_attr( $product->get_id() ) . '">Add to Cart</a>';
+                echo '<a href="#" class="button add_to_cart_button js-shop-atc" data-product_id="' . esc_attr( $product->get_id() ) . '">Add to Cart</a>';
             }
         }
     }
@@ -130,3 +130,31 @@ function hownd_exclude_product_from_category( $query ) {
     }
 }
 add_action( 'pre_get_posts', 'hownd_exclude_product_from_category' );
+
+
+function hownd_var_add_to_cart() {
+    $product_id = intval($_POST['product_id']);
+    $variation_id = intval($_POST['variation_id']);
+ 
+    $added = WC()->cart->add_to_cart($product_id, 1, $variation_id);
+ 
+    if ($added) {
+         // Prepare the fragments
+         $fragments = apply_filters( 'woocommerce_add_to_cart_fragments', array() );
+         // Get cart hash
+         $cart_hash = WC()->cart->get_cart_hash();
+  
+         // Return success response with fragments and cart hash
+         wp_send_json_success(array(
+             'fragments' => $fragments,
+             'cart_hash' => $cart_hash,
+         ));
+        // wc_add_to_cart_message($product_id);
+        // wp_send_json_success();
+    } else {
+        wp_send_json_error();
+    }
+}
+ 
+add_action('wp_ajax_hownd_var_add_to_cart', 'hownd_var_add_to_cart');
+add_action('wp_ajax_nopriv_hownd_var_add_to_cart', 'hownd_var_add_to_cart');

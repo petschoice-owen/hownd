@@ -48,7 +48,7 @@
                                 </a>
                                 <a href="<?php echo get_permalink( get_option('woocommerce_myaccount_page_id') ); ?>" class="d-none d-lg-block">Account</a>
                                 <?php
-                                    if ( class_exists( 'WooCommerce' ) ) :
+                                    if ( WC()->cart ) :
                                     $cart_count = WC()->cart->get_cart_contents_count();
                                 ?>
                                     <div class="header__cart">
