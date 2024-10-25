@@ -3,6 +3,7 @@
     "title": "Hownd - FAQ",
     "description": "Group of accordions with search and sidebar (dedicated for FAQ page)",
     "style": "block-faq",
+    "script": "block-faq",
     "category": "hownd-blocks",
     "icon": "list-view",
     "apiVersion": 2,

@@ -52,7 +52,7 @@ else : ?>
             <div class="hownd-faq__groups">
                 <?php while ( have_rows( 'hownd_faq_accordion_groups' ) ) : the_row(); ?>
                     <div class="hownd-faq__group">
-                        <?php echo get_sub_field( 'heading' ) ? '<h4 id="'.$block['id'].'-cat-'.get_row_index().'" class="hownd-faq__group-title">'. get_sub_field( 'heading' ) .'</h4>' : ''; ?>
+                        <?php echo get_sub_field( 'heading' ) ? '<h4 id="'.$block['id'].'-faq-'.get_row_index().'" class="hownd-faq__group-title">'. get_sub_field( 'heading' ) .'</h4>' : ''; ?>
                         <?php if ( have_rows( 'list' ) ) : ?>
                             <?php while ( have_rows( 'list' ) ) : the_row(); ?>
                                 <div class="hownd-faq__item">

@@ -66,7 +66,7 @@
                                                     </g>
                                                 </g>
                                             </svg>
-                                            <span class="count"><?php echo esc_html( $cart_count ); ?></span>
+                                            <span class="count"><?php echo $cart_count ? $cart_count : 0; ?></span>
                                         </a>
                                         <div class="header__quickcart">
                                             <ul class="nav nav-tabs" role="tablist">

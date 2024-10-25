@@ -369,6 +369,14 @@ jQuery(function($) {
                 }
             });
         }
+
+        if($('.wlr-coupons-container').length > 0) {
+            $('.wlr-new-coupon-card').each(function () {
+                if($(this).find('.wlr-name.wlr-pre-text').text().replace(/ /g,'') === 'DonatetoAllDogsMatter') {
+                    $(this).remove();
+                }
+            });
+        }
     };
 
     const signUpMailingList = () => {
