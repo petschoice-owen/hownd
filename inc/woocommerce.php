@@ -441,6 +441,18 @@ function hownd_separate_registration_form() {
 
             </form>
         </div>
+        <script type="text/javascript">
+            jQuery('#afreg_select_user_role').on('change', function() {
+                console.log(jQuery(this).val());
+                if(jQuery(this).val() === 'retailer' || jQuery(this).val() === 'groomer') {
+                    jQuery('input[placeholder="Company Name"]').attr('required', '');
+                    jQuery('input[placeholder="Company Email"]').attr('required', '');
+                }else {
+                    jQuery('input[placeholder="Company Name"]').removeAttr('required');
+                    jQuery('input[placeholder="Company Email"]').removeAttr('required');
+                }
+            });
+        </script>
     <?php
     return ob_get_clean();
 }

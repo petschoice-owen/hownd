@@ -70,6 +70,24 @@
     background-color: $lgray9;
     box-shadow: 0 0 8px 0;
 
+    form {
+        display: flex;
+        flex-direction: column;
+
+        & > h2 {
+            order: -2;
+        }
+
+        & > .afreg_extra_fields:nth-of-type(2) {
+            order: -1;
+        }
+
+        h3:empty,
+        br {
+            display: none;
+        }
+    }
+
     h2 {
         color: $primary;
         text-align: center;
