@@ -336,7 +336,7 @@ function hownd_hide_checkout_button_on_ajax() {
             var restricted_zone_selected = false;
             var has_restricted_message = <?php echo $has_restricted_message; ?>;
             var shippingMethod = $('#shipping_method').text().trim();
-            var isShippingInfoEmpty = $('#calc_shipping_postcode').val() === '';
+			var isShippingInfoEmpty = $('#calc_shipping_postcode').val() === '';
             if ( ( !shippingMethod || shippingMethod.includes("Restricted Zone") ) && has_restricted_message ) {
                 restricted_zone_selected = true;
             }
@@ -441,7 +441,7 @@ function hownd_separate_registration_form() {
 
             </form>
         </div>
-        <script type="text/javascript">
+<script type="text/javascript">
             jQuery('#afreg_select_user_role').on('change', function() {
                 console.log(jQuery(this).val());
                 if(jQuery(this).val() === 'retailer' || jQuery(this).val() === 'groomer') {
@@ -577,11 +577,72 @@ function hownd_hide_price_for_multiple_variations($price, $product) {
 }
 add_filter('woocommerce_get_price_html', 'hownd_hide_price_for_multiple_variations', 10, 2);
 
-// add_filter( 'wc_order_is_editable', 'custom_order_status_editable', 9999, 2 );
- 
-// function custom_order_status_editable( $allow_edit, $order ) {
-//     if ( $order->get_status() === 'processing' ) {
-//         $allow_edit = true;
-//     }
-//     return $allow_edit;
-// }
+//PRODUCT PAGE - change price on subscription option change
+function hownd_change_price_on_subs_change() {
+    ?>
+        <script type="text/javascript">
+            jQuery(document).ready(function($) {
+                var isVariable = false;
+                if($('.product-type-variable').length > 0) {
+                    isVariable = true;
+                }
+                if(isVariable){
+                    var originalPrice = $('form .woocommerce-variation-price .price').html();
+                }else {
+                    var originalPrice = $('.product .summary > .price').html();
+                }
+               
+                $( document ).on( 'found_variation', function( event, variation ) {
+                    originalPrice = $('form .woocommerce-variation-price .price').html();
+                });
+                if($('.bos4w-display-options').length > 0) {
+                    $('.bos4w-display-options').find('input[type="radio"]').each(function() {
+                        $(this).on('change', function(e){
+                            $('.bos4w-display-options').find('label').removeClass('checked');
+                            if ($(this).is(':checked')) {
+                                $(this).closest('label').addClass('checked');
+                            }
+                            if($(this).val() === '1') {
+                                if(isVariable){
+                                    var getPrice = $('#bos4w-dropdown-plan option[value="'+$("#bos4w-dropdown-plan").val()+'"]').find('.amount').html();
+                                    $(this).closest('form').find('.woocommerce-variation-price .price').html(getPrice);
+                                }else{
+                                    var getPrice = $('#bos4w-dropdown-plan option[value="'+$("#bos4w-dropdown-plan").val()+'"]').data('price');
+                                    $('.product .summary > .price').text('£'+getPrice.toFixed(2));
+                                }
+                            }else {
+                                if(isVariable){
+                                    $(this).closest('form').find('.woocommerce-variation-price .price').html(originalPrice);
+                                }else {
+                                    $('.product .summary > .price').html(originalPrice);
+                                }
+                            }
+                        });
+                        if ($(this).is(':checked')) {
+                            $(this).closest('label').addClass('checked');
+                        }
+                    });
+
+                    $('#bos4w-dropdown-plan').on('change', function() {
+                        if(isVariable){
+                            var getPrice = $('#bos4w-dropdown-plan option[value="'+$("#bos4w-dropdown-plan").val()+'"]').find('.amount').html();
+                            $(this).closest('form').find('.woocommerce-variation-price .price').html(getPrice);
+                        }else{
+                            var getPrice = $('#bos4w-dropdown-plan option[value="'+$("#bos4w-dropdown-plan").val()+'"]').data('price');
+                            $('.product .summary > .price').text('£'+getPrice.toFixed(2));
+                        }
+                    });
+
+                    $(document).on('woocommerce_variation_has_changed', function() {
+                        originalPrice = $('form .woocommerce-variation-price .price .amount').html();
+                        if($('.bos4w-display-options').find('input[type="radio"]:checked').val() === '1') {
+                            var getPrice = $('#bos4w-dropdown-plan option[value="'+$("#bos4w-dropdown-plan").val()+'"]').find('.amount').html();
+                            $('form .woocommerce-variation-price .price .amount').html(getPrice);
+                        }
+                    });
+                }
+            });
+        </script>
+    <?php
+}
+add_action( 'woocommerce_after_single_product_summary', 'hownd_change_price_on_subs_change', 10, 0 );

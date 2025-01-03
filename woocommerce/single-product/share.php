@@ -20,6 +20,8 @@
  if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
+
+// do_action( 'woocommerce_share' ); // Sharing plugins can hook into here.
 ?>
 <div class="social-share">
     <a href="//www.facebook.com/sharer.php?u=<?php echo get_the_permalink(); ?>" class="fab fa-square-facebook" target="_blank"><span class="visually-hidden">Facebook</span></a>

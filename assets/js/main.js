@@ -184,8 +184,8 @@ jQuery(function($) {
                 }
             });
         });
-
-        $('body').on('click', '.products .js-shop-atc-variable', function(e) {
+		
+		$('body').on('click', '.products .js-shop-atc-variable', function(e) {
             e.preventDefault();
             
             var button = $(this);
@@ -369,8 +369,8 @@ jQuery(function($) {
                 }
             });
         }
-
-        if($('.wlr-coupons-container').length > 0) {
+		
+		if($('.wlr-coupons-container').length > 0) {
             $('.wlr-new-coupon-card').each(function () {
                 if($(this).find('.wlr-name.wlr-pre-text').text().replace(/ /g,'') === 'DonatetoAllDogsMatter') {
                     $(this).remove();
@@ -392,7 +392,7 @@ jQuery(function($) {
 
     header();
     logoSlider();
-    bos4wInputRadio();
+//     bos4wInputRadio();
     productQuantity();
     productAccordion();
     addToCart();

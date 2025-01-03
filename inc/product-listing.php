@@ -74,7 +74,7 @@ function hownd_add_to_cart_button_products() {
                 if ( $product->get_child( $first_variation_id )->is_in_stock() ) {
                     echo '<a href="#" class="button add_to_cart_button js-shop-atc-variable" data-product_id="' . esc_attr( $product_id ) . '" data-variation_id="' . esc_attr( $first_variation_id ) . '">Add to Cart</a>';
                 } else {
-                    // echo '<a href="' . esc_url( $product->get_permalink() ) . '" class="button">View Product</a>';
+//                     echo '<a href="' . esc_url( $product->get_permalink() ) . '" class="button">View Product</a>';
                 }
             }
         } else {
@@ -131,7 +131,6 @@ function hownd_exclude_product_from_category( $query ) {
 }
 add_action( 'pre_get_posts', 'hownd_exclude_product_from_category' );
 
-
 function hownd_var_add_to_cart() {
     $product_id = intval($_POST['product_id']);
     $variation_id = intval($_POST['variation_id']);
@@ -149,8 +148,6 @@ function hownd_var_add_to_cart() {
              'fragments' => $fragments,
              'cart_hash' => $cart_hash,
          ));
-        // wc_add_to_cart_message($product_id);
-        // wp_send_json_success();
     } else {
         wp_send_json_error();
     }

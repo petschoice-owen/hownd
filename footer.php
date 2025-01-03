@@ -92,7 +92,7 @@
                                         <div class="footer__newsletter-socials">
                                             <?php echo get_template_part( 'partials/social' ); ?>
                                         </div>
-                                        <div class="footer__newsletter-form">
+										<div class="footer__newsletter-form">
 											<div class="klaviyo-form-UScpaq"></div>
 										</div>
                                     </div>
@@ -247,6 +247,6 @@
         </div>
     <?php endif; ?>
     <?php wp_footer(); ?>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js" defer></script>
     </body>
 </html>

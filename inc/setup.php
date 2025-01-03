@@ -13,7 +13,7 @@ function hownd_enqueue_scripts() {
         wp_enqueue_script( 'autocomplete', 'https://cdnjs.cloudflare.com/ajax/libs/jquery.devbridge-autocomplete/1.4.11/jquery.autocomplete.min.js', array(), '', true );
     }
     wp_enqueue_script( 'main-script', get_template_directory_uri() . '/assets/js/main.js', array(), $version, true );
-    wp_localize_script( 'main-script', 'ajax_vars', array( 'ajax_url' => admin_url( 'admin-ajax.php' ) ) );
+	wp_localize_script( 'main-script', 'ajax_vars', array( 'ajax_url' => admin_url( 'admin-ajax.php' ) ) );
 
 }
 add_action( 'wp_enqueue_scripts', 'hownd_enqueue_scripts', 4 );

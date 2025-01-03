@@ -162,6 +162,10 @@
             <div class="mobile-nav-overlay"></div>
         </header>
         <div class="header-placeholder"></div>
+<!-- 		<div class="hownd-mini-banner">
+            <div>No deliveries between 22nd December and 2nd January</div>
+            <div><a href="/delivery" class="btn-primary">Find out more</a></div>
+        </div> -->
         <main>
             <?php echo is_woocommerce() ? '<div class="container">' : ''; ?>
                 <?php echo is_account_page() ? '<h2 class="text-center">My Account</h2>' : ''; ?>
